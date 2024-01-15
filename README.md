@@ -1,12 +1,14 @@
 # FEDAssignment2
-
-One or two paragraphs providing an overview of your project. Tell us about your project.
-
-Essentially, this part is your sales pitch.
+Our project is focused on making a quiz wesbite with the purpose of entertaining users and testing their trivia knowledge.
 
 ## Design Process
+Website is designed for all age groups but is mostly focused on the young adult audience (aged 16 to 30)
 
-Provide us insights about your design process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+We want them to use the website as a way to pass the time and maybe even learn something
+
+Thus we decided on a quiz website to challenge user's knowledge on certain topics.
+
+Provide us insights about your design process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.*
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
 
