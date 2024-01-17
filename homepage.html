@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #search-bar {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #greeting-bar {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        #user-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        #stats-bar {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #lets-play {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .quiz-box {
+            border: 1px solid #ecf0f1;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+            cursor: pointer;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #bdc3c7;
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="search-bar">
+        <!-- Search bar content goes here -->
+        <input type="text" placeholder="Search for quizzes...">
+    </div>
+
+    <div id="greeting-bar">
+        <!-- Greeting and user icon content goes here -->
+        <img src="user-icon.jpg" alt="User Icon" id="user-icon">
+        <span>Good Morning, [Username]!</span>
+    </div>
+
+    <div id="stats-bar">
+        <!-- Ranking and Points content goes here -->
+        <div>
+            <img src="coin-icon.jpg" alt="Coin Icon" style="width: 20px; height: 20px;">
+            <span>Ranking</span>
+            <br>
+            <span>User's Rank</span>
+        </div>
+        <div>
+            <img src="point-icon.jpg" alt="Point Icon" style="width: 20px; height: 20px;">
+            <span>Points</span>
+            <br>
+            <span>User's Points</span>
+        </div>
+    </div>
+
+    <div id="lets-play">
+        <!-- "Let's Play!" content goes here -->
+        <h2>Let's Play!</h2>
+    </div>
+
+    <!-- Quiz boxes content goes here -->
+    <div class="quiz-box">
+        <img src="quiz-icon1.jpg" alt="Quiz Icon">
+        <h3>Quiz Name 1</h3>
+        <p>Short description about the quiz.</p>
+    </div>
+
+    <div class="quiz-box">
+        <img src="quiz-icon2.jpg" alt="Quiz Icon">
+        <h3>Quiz Name 2</h3>
+        <p>Short description about the quiz.</p>
+    </div>
+
+    <div class="quiz-box">
+        <img src="quiz-icon3.jpg" alt="Quiz Icon">
+        <h3>Quiz Name 3</h3>
+        <p>Short description about the quiz.</p>
+    </div>
+
+    <div class="quiz-box">
+        <img src="quiz-icon4.jpg" alt="Quiz Icon">
+        <h3>Quiz Name 4</h3>
+        <p>Short description about the quiz.</p>
+    </div>
+
+    <!-- Add more quiz boxes as needed -->
+
+    <div id="footer">
+        <!-- Footer content goes here -->
+        <p>Looks like you've reached the end!</p>
+    </div>
+
+    <div id="back-to-top" onclick="scrollToTop()">
+        <!-- Back to top button content goes here -->
+        ^
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+
+</html>
