@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+
+  <script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+      </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+      padding: 10% 3% 10% 3%;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s; 
+      
+
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .slider-container {
+      width: 50%;
+      margin-bottom: 20px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    #language-select {
+      padding: 5px;
+    }
+
+    .mode {
+            float: right;
+        }
+
+    .change {
+            cursor: pointer;
+            border: 1px solid #555;
+            border-radius: 40%;
+            width: 20px;
+            text-align: center;
+            padding: 5px;
+            margin-left: 8px;
+        }
+
+    .dark {
+            background-color: #222;
+            color: #e6e6e6;
+        }
+  </style>
+</head>
+<body>
+  <h1>Settings</h1>
+
+  <!-- Volume Slider -->
+  <div class="slider-container">
+    <label for="volume-slider">Volume:</label>
+    <input type="range" id="volume-slider" min="0" max="100" step="10">
+    <span id="volume-label">0%</span>
+  </div>
+
+  <!-- Brightness Slider -->
+  <div class="slider-container">
+    <label for="brightness-slider">Brightness:</label>
+    <input type="range" id="brightness-slider" min="0" max="100" step="10">
+    <span id="brightness-label">0%</span>
+  </div>
+
+  <!-- Color Scheme Toggle -->
+  <div class="mode">
+    Dark mode:             
+    <span class="change">OFF</span>
+  </div>
+
+  <!-- Language Dropdown -->
+  <div>
+    <label for="language-select">Language:</label>
+    <select id="language-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="de">German</option>
+    </select>
+  </div>
+
+  <script>
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeLabel = document.getElementById('volume-label');
+    const brightnessSlider = document.getElementById('brightness-slider');
+    const brightnessLabel = document.getElementById('brightness-label');
+    
+    const languageSelect = document.getElementById('language-select');
+
+    // Volume Slider
+    volumeSlider.addEventListener('input', function() {
+      volumeLabel.textContent = `${volumeSlider.value}%`;
+    });
+
+    // Brightness Slider
+    brightnessSlider.addEventListener('input', function() {
+      brightnessLabel.textContent = `${brightnessSlider.value}%`;
+      
+      // need to implement functionality later, currently just logging the brightness value to the console
+      console.log(`Brightness set to ${brightnessSlider.value}%`);
+    });
+
+    // Color Scheme Toggle
+        $( ".change" ).on("click", function() {
+            if( $( "body" ).hasClass( "dark" )) {
+                $( "body" ).removeClass( "dark" );
+                $( ".change" ).text( "OFF" );
+            } else {
+                $( "body" ).addClass( "dark" );
+                $( ".change" ).text( "ON" );
+            }
+        });
+
+    // Language Dropdown
+    languageSelect.addEventListener('change', function() {
+      //  need to implement functionality later, currently just logging the selected language to the console
+      console.log(`Selected language: ${languageSelect.value}`);
+    });
+  </script>
+</body>
+</html>
