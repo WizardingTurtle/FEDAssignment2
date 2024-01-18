@@ -1,38 +1,4 @@
-[
-    {
-        "quizname": "quiz1",
-        "maxscore":10,
-        "score":0,
-        "questions":[
-            {
-                "question":"what is family?",
-                "option":["answer","idk","what"],
-                "answer":"your mom"
-            },
-            {
-                "question":"what is family?",
-                "option":["answer","idk","what"],
-                "answer":"your mom"
-            }
-        ]    
-    },
-    {
-        "quizname": "quiz1",
-        "maxscore":10,
-        "score":0,
-        "questions":[
-            {
-                "question":"what is family?",
-                "option":["answer","idk","what"],
-                "answer":"your mom"
-            },
-            {
-                "question":"what is family?",
-                "option":["answer","idk","what"],
-                "answer":"your mom"
-            }
-        ]    
-    },
+
     {
         "quizname": "quiz1",
         "maxscore":10,
@@ -50,4 +16,3 @@
             }
         ]    
     }
-]
