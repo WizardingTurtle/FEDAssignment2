@@ -1,16 +1,20 @@
 
     {
+        
         "quizname": "quiz1",
         "maxscore":10,
         "score":0,
-        "questions":[
+        "questions":
+        [
             {
                 "question":"what is family?",
+                "info":"Because ohana means  amily",
                 "option":["answer","idk","what"],
                 "answer":"your mom"
             },
             {
                 "question":"what is family?",
+                "info":"Because ohana means  amily",
                 "option":["answer","idk","what"],
                 "answer":"your mom"
             }
