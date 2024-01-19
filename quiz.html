@@ -109,39 +109,44 @@
 
     <div id="header">
         <div id="quit-button">X</div>
-        <div id="progress-bar"></div>
+        <div><h2 id="quiz-name">QUIZ</h2></div>
+        <div id="progress-bar">[][][][][][][][][][][][][][][][]</div>
     </div>
 
     <div id="main-content">
 
         <div id="timer">60s</div>
 
-        <div class="quiz-question">
+        <div class="quiz-question" id="question">
             <h2>Question 1</h2>
             <p>What is the capital of France?</p>
         </div>
 
         <div class="options-bar">
-            <label class="option">
+            <label class="option" id="option1">
                 <input type="checkbox"> Paris
             </label>
-            <label class="option">
+            <label class="option" id="option2">
                 <input type="checkbox"> Berlin
             </label>
-            <label class="option">
+            <label class="option" id="option3">
                 <input type="checkbox"> London
             </label>
-            <label class="option">
+            <label class="option" id="option4">
                 <input type="checkbox"> Rome
             </label>
         </div>
 
         <button id="submit-btn">Submit Question</button>
 
-        <div class="feedback correct">Correct! Paris is the capital of France.</div>
+        <div class="feedback correct" id="info">Correct! Paris is the capital of France.</div>
 
+        <!-- commented out for reference -->
+
+        <!-- 
         <div id="timer">60s</div>
 
+        
         <div class="quiz-question">
             <h2>Question 2</h2>
             <p>What is the largest planet in our solar system?</p>
@@ -193,7 +198,7 @@
         <div class="feedback correct">Correct! Tokyo is the capital of Japan.</div>
 
     </div>
-
+-->
     <script>
         // JavaScript code for handling quiz logic can be added here
     </script>
