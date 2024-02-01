@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .login-container {
+            margin: 100px auto;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>register</h2>
+        <form action="/login" method="post">
+            <label>Username:</label><br>
+            <input id="username" type="text" name="username" required><br>
+
+            <label>Password:</label><br>
+            <input id="password" type="password" name="password" required><br>
+
+            <label for="password">Confirm Password:</label>
+            <input type="password" id="passwordconfirm" name="password" required>
+
+            <div>
+                <button type="submit">Sign up</button>
+                <button type="button">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="login.js">
+
+    </script>
+</body>
+</html>

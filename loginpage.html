@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <form id="form">
+            <label>Username:</label><br>
+            <input id="username" type="text" name="username" required><br>
+
+            <label>Password:</label><br>
+            <input id="password" type="password" name="password" required><br>
+
+            <div>
+                <input id="loginbtn" type="submit" value="Login">
+                
+            </div>
+        </form>
+        <input id="registerbtn" type="button" value="Register">
+        
+    </div>
+
+    <script  src="login.js"></script>
+
+    <div id="add-update-msg">
+        <div class="alert alert-failure" role="alert">
+          Login failed, if you see this message scold emmanuel for poor JS coding
+        </div>
+    </div>
+
+    
+</body>
+</html>
