@@ -1,13 +1,21 @@
 // code for login page
 // idea - request data from restdb and check if account is valid
 // if correct - show homepage using selected profile
+if (typeof(Storage) !== "undefined") {
+  // initialize storage
+  if (sessionStorage.Username) {
+    sessionStorage.Username = sessionStorage.Username;
+  }
+  else {
+    sessionStorage.Username = "";
+  }
+} else {
+  console.log("error! session storage does not exist! account credentials will not be remembered")
+}
 
-document.addEventListener("DOMContentLoaded", Setup);
-
-
+document.addEventListener("DOMContentLoaded", SetupLogin);
 
 // functions
-
 // stop submit from refreshing
 const subform = document.getElementById("loginbtn");
 subform.addEventListener("click",submitFormReturn,false)
@@ -18,7 +26,7 @@ function submitFormReturn(event) {
 }
 
 // Initialize page function
-function Setup() {
+function SetupLogin() {
   HideMe();
 }
 
@@ -31,20 +39,20 @@ function HideMe () {
 // validate account function
 function ValidateAccount (DBpassword, Password) {
 
-  var validify = false;
-
   if (DBpassword == Password) {
-    validify = true;
+    // store user credentials in session storage to make pulling info easier
+    sessionStorage.setItem('Username',document.getElementById("username").value);
+    sessionStorage.setItem('Password',document.getElementById("password").value);
+    window.location.replace("./homepage.html")
+    //ideally will remember login credentials throughout the website
   }
   else {
     document.getElementById("add-update-msg").style.display = "inline";
   }
   
 
-  if (validify == true) {
-      window.location.href("homepage.html")
-      //ideally will remember login credentials throughout the website
-  }
+  
+
 }
 
 // verify account details function - uses GET request
