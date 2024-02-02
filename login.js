@@ -1,49 +1,49 @@
 // code for login page
 // idea - request data from restdb and check if account is valid
 // if correct - show homepage using selected profile
-
-document.addEventListener("DOMContentLoaded", Setup);
+document.addEventListener("DOMContentLoaded", setupLogin);
 
 // functions
-
 // stop submit from refreshing
 const subform = document.getElementById("loginbtn");
 subform.addEventListener("click", submitFormReturn, false)
 
 function submitFormReturn(event) {
-    VerifyLogin();
-    event.preventDefault();
+  verifyLogin();
+  event.preventDefault();
 }
 
 // Initialize page function
-function Setup() {
-    HideMe();
+function setupLogin() {
+  HideMe();
 }
 
 // hide alerts function
-function HideMe() {
-    document.getElementById("add-update-msg").style.display = "none";
+function hideMe () {
+  document.getElementById("add-update-msg").style.display = "none";
 }
 
 // validate account function
-function ValidateAccount(DBpassword, Password) {
+function validateAccount (DBpassword, Password) {
 
-    var validify = false;
+  if (DBpassword == Password) {
+    // store user credentials in session storage to make pulling info easier
+    sessionStorage.setItem('Username',document.getElementById("username").value);
+    sessionStorage.setItem('Password',document.getElementById("password").value);
+    window.location.replace("./homepage.html")
+    //ideally will remember login credentials throughout the website
+  }
+  else {
+    document.getElementById("add-update-msg").style.display = "inline";
+  }
+  
 
-    if (DBpassword == Password) {
-        validify = true;
-    } else {
-        document.getElementById("add-update-msg").style.display = "inline";
-    }
+  
 
-    if (validify == true) {
-        window.location.href = "homepage.html";
-        //ideally will remember login credentials throughout the website
-    }
 }
 
 // verify account details function - uses GET request
-function VerifyLogin() {
+function verifyLogin() {
 
     let Username = document.getElementById("username").value;
     let Password = document.getElementById("password").value;
@@ -65,25 +65,27 @@ function VerifyLogin() {
         },
     }
 
-    // fetch data and check if password valid
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Username}"}`, settings)
-        .then(response => response.json())
-        .then(response => {
-            // Handle the JSON data here
-            console.log(response);
-            if (response[0].hasOwnProperty("password")) {
-                ValidateAccount(response[0].password, Password);
-            } else {
-                document.getElementById("add-update-msg").innerText = "Account does not exist";
-                document.getElementById("add-update-msg").style.display = "inline";
-            }
-        })
-        .catch(error => {
-            // Handle errors here
-            console.error('Error get request failed:', error);
-            document.getElementById("add-update-msg").innerText = "GET REQUEST FAILED MISERABLY";
-            document.getElementById("add-update-msg").style.display = "inline";
-        });
+  // fetch data and check if password valid
+  fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Username}"}`,settings)
+  .then(response => response.json())
+  .then(response => {
+    // Handle the JSON data here
+    console.log(response);
+
+    if (response[0].hasOwnProperty("password")) {
+      validateAccount(response[0].password, Password);
+    }
+    else {
+      document.getElementById("add-update-msg").innerText = "Account does not exist";
+      document.getElementById("add-update-msg").style.display = "inline";
+    }
+  })
+  .catch(error => {
+    // Handle errors here
+    console.error('Error get request failed:', error);
+    document.getElementById("add-update-msg").innerText = "GET REQUEST FAILED MISERABLY";
+    document.getElementById("add-update-msg").style.display = "inline";
+  });
 }
 
   
