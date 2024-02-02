@@ -1,7 +1,7 @@
 // code for login page
 // idea - request data from restdb and check if account is valid
 // if correct - show homepage using selected profile
-document.addEventListener("DOMContentLoaded", SetupLogin);
+document.addEventListener("DOMContentLoaded", setupLogin);
 
 // functions
 // stop submit from refreshing
@@ -9,23 +9,23 @@ const subform = document.getElementById("loginbtn");
 subform.addEventListener("click",submitFormReturn,false)
 
 function submitFormReturn(event) {
-  VerifyLogin();
+  verifyLogin();
   event.preventDefault();
 }
 
 // Initialize page function
-function SetupLogin() {
+function setupLogin() {
   HideMe();
 }
 
 // hide alerts function
-function HideMe () {
+function hideMe () {
   document.getElementById("add-update-msg").style.display = "none";
 }
 
 
 // validate account function
-function ValidateAccount (DBpassword, Password) {
+function validateAccount (DBpassword, Password) {
 
   if (DBpassword == Password) {
     // store user credentials in session storage to make pulling info easier
@@ -44,7 +44,7 @@ function ValidateAccount (DBpassword, Password) {
 }
 
 // verify account details function - uses GET request
-function VerifyLogin() {
+function verifyLogin() {
 
   let Username = document.getElementById("username").value;
   let Password = document.getElementById("password").value;  
@@ -72,8 +72,9 @@ function VerifyLogin() {
   .then(response => {
     // Handle the JSON data here
     console.log(response);
+
     if (response[0].hasOwnProperty("password")) {
-      ValidateAccount(response[0].password, Password);
+      validateAccount(response[0].password, Password);
     }
     else {
       document.getElementById("add-update-msg").innerText = "Account does not exist";
