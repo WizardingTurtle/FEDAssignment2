@@ -3,37 +3,47 @@
 
 <head>
     <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-
-    <div class="login-container">
-        <h2>Login</h2>
-
-        <form id="form">
-            <label>Username:</label><br>
-            <input id="username" type="text" name="username" required><br>
-
-            <label>Password:</label><br>
-            <input id="password" type="password" name="password" required><br>
-
-            <div>
-                <input id="loginbtn" type="submit" value="Login">
-                
-            </div>
-        </form>
-        <input id="registerbtn" type="button" value="Register">
-        
-    </div>
-
-    <script  src="login.js"></script>
-
-    <div id="add-update-msg">
-        <div class="alert alert-failure" role="alert">
-          Login failed, if you see this message scold emmanuel for poor JS coding
+<body class="no-scroll">
+    <div id="title-bar">
+        <h1>Quests</h1>
+        <h3>& Quizzes</h3>
         </div>
-    </div>
 
-    
+        <div id="darktriangle"></div>
+
+        <div id="login-bar">
+            <div class="round-rectangle">
+                <div id="login-text">LOGIN</div>
+                <form id="form">
+                    <label>Username:</label><br>
+                    <input id="username" type="text" name="username" required><br>
+
+                    <label>Password:</label><br>
+                    <input id="password" type="password" name="password" required><br>
+
+                    <div>
+                        <input id="loginbtn" type="submit" value="LOGIN">
+                    </div>
+                </form>
+                <input id="registerbtn" type="button" value="REGISTER">
+            </div>
+        </div>
+
+        <div id="triangle"></div>
+
+        <script src="login.js"></script>
+
+        <div id="add-update-msg">
+            <div class="alert alert-failure" role="alert">
+                LOGIN FAILED: SCOLD EMMANUEL FOR POOR JS CODING
+            </div>
+    </div>
 </body>
+
 </html>

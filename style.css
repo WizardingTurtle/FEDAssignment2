@@ -85,16 +85,6 @@ body {
     font-size: 40px;
 }
 
-
-.quiz-box {
-    border: 1px solid #ecf0f1;
-    background-color: #DBDFE1;
-    margin: 10px;
-    padding: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
 #footer {
     color: white;
     background-color: #15314B;
@@ -124,17 +114,31 @@ body {
 
 #triangle-container {
     position: relative;
-    width: 100%;
-    height: 50px; /* Adjust the height as needed */
+ 
     overflow: hidden;
 }
 
 #triangle {
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 50px;
     border-left: 100vw solid transparent;
     
     border-top: 50px solid #C6D1D8; 
+}
+
+#logintriangle {
+    width: 100%;
+    height: 25px;
+    border-left: 100vw solid transparent;
+    border-top: 20px solid #C6D1D8; 
+}
+
+#darktriangle {
+    width: 100%;
+    height: 25px;
+    border-left: 100vw solid transparent;
+    
+    border-top: 20px solid #15314B; 
 }
 
 #lets-play {
@@ -153,5 +157,117 @@ body {
 }
 
 #content {
-    padding-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space;
+}
+
+.quiz-box {
+    flex: 0 0 calc(50% - 20px); /* Adjust the width as needed, considering margins */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ecf0f1;
+    background-color: #DBDFE1;
+    border-radius: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+
+#title-bar {
+    background-color: #15314B;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#title-bar h1, #title-bar h3 {
+    opacity: 0; /* Initial opacity set to 0 */
+    animation: fadeIn 1.5s ease-out forwards; /* Animation duration and timing function */
+}
+
+/* keyframes for fadein animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+#login-bar {
+    background-color: #C6D1D8;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.round-rectangle {
+    background-color: #8ca8b6;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px;
+}
+
+#login-text {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+#loginbtn,
+#registerbtn {
+    background-color: #213D57;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+}
+
+#loginbtn:hover,
+#registerbtn:hover {
+    background-color: #C6D1D8; /* change color on hover */
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+#registerbtn {
+    background-color: #213D57;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+}
+
+#add-update-msg {
+    display: none;
+    color: rgb(162, 25, 25);
+    margin-top: 10px;
+    text-align: center;
+}
+
+.no-scroll {
+    overflow: hidden;
 }
