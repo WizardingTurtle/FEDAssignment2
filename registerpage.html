@@ -1,71 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
+  <head>
+    <title>Register Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-        .login-container {
-            margin: 100px auto;
-            max-width: 300px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-container label {
-            display: block;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        .login-container button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="login-container">
-        <h2>register</h2>
-        <form action="" method="post">
-            <label>Username:</label><br>
-            <input id="newUsername" type="text" name="username" required><br>
-
-            <label>Password:</label><br>
-            <input id="newPassword" type="password" name="password" required><br>
-
-            <label for="password">Confirm Password:</label>
-            <input id="newPasswordconfirm" type="password"  name="password" required>
-
-            <div>
-                <button type="submit">Sign up</button>
-                <button type="button">Login</button>
-            </div>
-        </form>
+  <body class="no-scroll">
+    <div id="title-bar">
+      <h1>Quests</h1>
+      <h3>& Quizzes</h3>
     </div>
 
-    <script src="login.js">
+    <div id="darktriangle"></div>
 
-    </script>
-</body>
+    <div id="login-bar">
+      <div class="round-rectangle">
+
+        <div id="login-text">REGISTER</div>
+        <form id="form">
+          <label>Username:</label><br />
+          <input id="username" type="text" name="username" required /><br />
+
+          <label>Password:</label><br />
+          <input id="password" type="password" name="password" required/><br />
+
+          <label for="password">Confirm Password:</label><br />
+          <input id="passwordconfirm" type="password" name="password" required/><br />
+
+          <div class="login-btn-container">
+            <div><input id="loginbtn" type="submit" value="SIGN UP"></div>
+            <div> Already have an account?
+            <a
+              id="loginbtn"
+              type="text"
+              value="REGISTER"
+              onclick="location.assign('loginpage.html')"
+              >Login here
+            </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="triangle"></div>
+
+    <script src="register.js"></script>
+
+    <div id="add-update-msg">
+      <div class="alert alert-failure" role="alert">
+        REGISTER FAILED: IF YOU SEE THIS SCOLD EMMANUEL FOR POOR JS CODING
+      </div>
+    </div> 
+  </body>
 </html>
