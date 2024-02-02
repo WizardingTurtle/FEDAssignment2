@@ -1,18 +1,6 @@
 // code for homepage.html
 // idea grab user info from session storage and display it
 // api request to grab data for quizes to create objects
-if (typeof(Storage) !== "undefined") {
-  // initialize storage
-  if (sessionStorage.Username) {
-    sessionStorage.Username = sessionStorage.Username;
-  }
-  else {
-    sessionStorage.Username = "";
-  }
-} else {
-  console.log("error! session storage does not exist! account credentials will not be remembered")
-}
-
 
 document.addEventListener("DOMContentLoaded", SetupHome);
 
@@ -58,6 +46,8 @@ function addQuizObjects() {
 function displayQuizObjects (apiObject) {
   var quizCount = apiObject.length;
   console.log(quizCount);
+  let Content = document.getElementById("content");
+
   for (var i = 0; i < quizCount; i++) {
 
     let newQuizDiv = document.createElement("div");
@@ -65,20 +55,28 @@ function displayQuizObjects (apiObject) {
 
     // great now we have to fetch the image really RESTDB??
 
-    /*
     let newQuizImg = document.createElement("img");
-    console.log(apiObject[i].quizimg[0]);
-    // newQuizImg.src = `"https://mydatabase-c3eb.restdb.io/rest/quiz/media/"${apiObject[i].quizimg[0]}""`;
+    console.log(apiObject[i].quizimglink);
+
+    if (apiObject[i].quizimglink != null) {
+      newQuizImg.src = apiObject[i].quizimglink;
+    }
+    else {
+      // ideally will use default img
+    }
+
     newQuizImg.alt = "Quiz Icon";
     newQuizDiv.appendChild(newQuizImg);
 
-    */
-    let newQuizName = document.createTextNode(apiObject[i].quizname);
+    let newQuizName = document.createElement("h3");
+    newQuizName.appendChild(document.createTextNode(apiObject[i].quizname));
     newQuizDiv.appendChild(newQuizName);
 
-    let newQuizDesc = document.createTextNode(apiObject[i].quizdesc);
+    let newQuizDesc = document.createElement("p");
+    newQuizDesc.appendChild(document.createTextNode(apiObject[i].quizdesc));
     newQuizDiv.appendChild(newQuizDesc);
 
-    document.body.appendChild(newQuizDiv)
+    Content.appendChild(newQuizDiv)
+
   }
 }

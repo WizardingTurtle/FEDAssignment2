@@ -1,18 +1,6 @@
 // code for login page
 // idea - request data from restdb and check if account is valid
 // if correct - show homepage using selected profile
-if (typeof(Storage) !== "undefined") {
-  // initialize storage
-  if (sessionStorage.Username) {
-    sessionStorage.Username = sessionStorage.Username;
-  }
-  else {
-    sessionStorage.Username = "";
-  }
-} else {
-  console.log("error! session storage does not exist! account credentials will not be remembered")
-}
-
 document.addEventListener("DOMContentLoaded", SetupLogin);
 
 // functions
