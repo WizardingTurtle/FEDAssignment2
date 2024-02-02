@@ -64,9 +64,6 @@ function registerAccount() {
                 settings = {
                     method: 'POST',
                     headers: {
-                    // Specify the content type as JSON
-                    // You can include additional headers if needed
-                    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
                     'Content-Type': 'application/json', 
                     "x-apikey": APIKEY,
                     "Cache-Control": "no-cache"
@@ -85,8 +82,6 @@ function registerAccount() {
                     }
                     document.getElementById("add-update-msg-reg").innerText = "Account Succesfully created! jumping to homepage"; 
                     document.getElementById("add-update-msg-reg").style.display = "inline";
-                    
-
                 })
                 .catch(error => {
                     // Handle errors here

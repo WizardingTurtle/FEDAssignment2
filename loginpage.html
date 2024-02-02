@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Login Page</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body class="no-scroll">
+  <body class="no-scroll">
     <div id="title-bar">
-        <h1>Quests</h1>
-        <h3>& Quizzes</h3>
-        </div>
-
-        <div id="darktriangle"></div>
-
-        <div id="login-bar">
-            <div class="round-rectangle">
-                <div id="login-text">LOGIN</div>
-                <form id="form">
-                    <label>Username:</label><br>
-                    <input id="username" type="text" name="username" required><br>
-
-                    <label>Password:</label><br>
-                    <input id="password" type="password" name="password" required><br>
-
-                    <div>
-                        <input id="loginbtn" type="submit" value="LOGIN">
-                    </div>
-                </form>
-                <input id="registerbtn" type="button" value="REGISTER">
-            </div>
-        </div>
-
-        <div id="triangle"></div>
-
-        <script src="login.js"></script>
-
-        <div id="add-update-msg">
-            <div class="alert alert-failure" role="alert">
-                LOGIN FAILED: SCOLD EMMANUEL FOR POOR JS CODING
-            </div>
+      <h1>Quests</h1>
+      <h3>& Quizzes</h3>
     </div>
-</body>
 
+    <div id="darktriangle"></div>
+
+    <div id="login-bar">
+      <div class="round-rectangle">
+        <div id="login-text">LOGIN</div>
+        <form id="form">
+          <label>Username:</label><br />
+          <input id="username" type="text" name="username" required /><br />
+
+          <label>Password:</label><br />
+          <input id="password" type="password" name="password" required /><br />
+
+          <div class="login-btn-container">
+            <div><input id="loginbtn" type="submit" value="LOGIN" /></div>
+            <div>
+              Don't have an account?<a
+                id="registerbtn"
+                type="text"
+                value="REGISTER"
+                onclick="location.assign('registerpage.html')"
+                >Register here</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="triangle"></div>
+
+    <script src="login.js"></script>
+
+    <div id="add-update-msg">
+      <div class="alert alert-failure" role="alert">
+        LOGIN FAILED: SCOLD EMMANUEL FOR POOR JS CODING
+      </div>
+    </div>
+  </body>
 </html>

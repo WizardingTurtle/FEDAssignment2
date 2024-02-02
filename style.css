@@ -234,6 +234,7 @@ input[type="password"] {
 }
 
 #loginbtn,
+
 #registerbtn {
     background-color: #213D57;
     color: white;
@@ -271,3 +272,21 @@ input[type="password"] {
 .no-scroll {
     overflow: hidden;
 }
+
+.login-btn-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+
+.login-btn-container>:last-child {
+    position: absolute;
+    top: 0;
+  right: 0;
+}
+
+
+
