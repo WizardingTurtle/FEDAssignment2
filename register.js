@@ -188,6 +188,8 @@ async function registerAccount(Username, Password) {
                         }
                         document.getElementById("add-update-msg").innerText = "Account Succesfully created! jumping to homepage";
                         document.getElementById("add-update-msg").style.display = "inline";
+
+                        setTimeout(window.location.assign("./homepage.html"), 2000)
                         console.log("ra- proccess ends inside of fetch")
                     })
                     .catch(error => {
