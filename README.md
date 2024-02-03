@@ -60,7 +60,7 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
    1. Go to the "Login" page
    2. Try to submit the empty form and verify that an error message about the required fields appears
-   3. Try to submit the form with an invalid email address and verify that a relevant error message appears
+   3. Try to submit the form with an invalid account and verify that a relevant error message appears
    4. Try to submit the form with all inputs valid and verify that a success message appears.
    5. Repeat steps 2-4 at the "Register" page
 
