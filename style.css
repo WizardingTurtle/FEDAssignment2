@@ -1,10 +1,11 @@
 body {
-    
+
     font-family: 'Varela Round', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #475F76;
-    overflow: auto; /* Enable scrolling */
+    overflow: auto;
+    /* Enable scrolling */
 }
 
 #search-bar {
@@ -21,7 +22,7 @@ body {
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 
@@ -77,7 +78,7 @@ body {
 }
 
 #lets-play-bar {
-    background-color: #C6D1D8; 
+    background-color: #C6D1D8;
     margin-top: 10px;
     padding: 10px;
     text-align: justify;
@@ -90,7 +91,7 @@ body {
     background-color: #15314B;
     text-align: center;
     padding: 10px;
-    
+
 }
 
 #back-to-top {
@@ -114,7 +115,7 @@ body {
 
 #triangle-container {
     position: relative;
- 
+
     overflow: hidden;
 }
 
@@ -122,23 +123,23 @@ body {
     width: 100%;
     height: 50px;
     border-left: 100vw solid transparent;
-    
-    border-top: 50px solid #C6D1D8; 
+
+    border-top: 50px solid #C6D1D8;
 }
 
 #logintriangle {
     width: 100%;
     height: 25px;
     border-left: 100vw solid transparent;
-    border-top: 20px solid #C6D1D8; 
+    border-top: 20px solid #C6D1D8;
 }
 
 #darktriangle {
     width: 100%;
     height: 25px;
     border-left: 100vw solid transparent;
-    
-    border-top: 20px solid #15314B; 
+
+    border-top: 20px solid #15314B;
 }
 
 #lets-play {
@@ -148,12 +149,14 @@ body {
     transform: translateX(-50%);
     color: white;
     font-size: 18px;
-    z-index: 1; /* Ensure the text is above the triangle */
+    z-index: 1;
+    /* Ensure the text is above the triangle */
 }
 
 #stats-container {
     position: relative;
-    z-index: 2; /* Set a higher z-index to be above the triangle */
+    z-index: 2;
+    /* Set a higher z-index to be above the triangle */
 }
 
 #content {
@@ -163,7 +166,8 @@ body {
 }
 
 .quiz-box {
-    flex: 0 0 calc(50% - 20px); /* Adjust the width as needed, considering margins */
+    flex: 0 0 calc(50% - 20px);
+    /* Adjust the width as needed, considering margins */
     margin: 10px;
     padding: 15px;
     border: 1px solid #ecf0f1;
@@ -173,6 +177,30 @@ body {
     box-sizing: border-box;
 }
 
+.quiz-box-div {
+    position: relative;
+    height: 120px;
+    width: 120px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.quiz-box-div img {
+    position: absolute;
+    height: auto;
+    max-width: 100%;
+}
+
+.centeredvert img {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.centeredhori img {
+    max-width: none;
+    max-height: 100%;
+    transform: translateX(-10%);
+}
 
 
 #title-bar {
@@ -183,9 +211,12 @@ body {
     font-size: 18px;
 }
 
-#title-bar h1, #title-bar h3 {
-    opacity: 0; /* Initial opacity set to 0 */
-    animation: fadeIn 1.5s ease-out forwards; /* Animation duration and timing function */
+#title-bar h1,
+#title-bar h3 {
+    opacity: 0;
+    /* Initial opacity set to 0 */
+    animation: fadeIn 1.5s ease-out forwards;
+    /* Animation duration and timing function */
 }
 
 /* keyframes for fadein animation */
@@ -193,6 +224,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -230,7 +262,8 @@ input[type="password"] {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease;
+    /* Smooth transition on hover */
 }
 
 #loginbtn,
@@ -242,13 +275,16 @@ input[type="password"] {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition on hover */
 }
 
 #loginbtn:hover,
 #registerbtn:hover {
-    background-color: #C6D1D8; /* change color on hover */
-    transform: scale(1.05); /* Scale up on hover */
+    background-color: #C6D1D8;
+    /* change color on hover */
+    transform: scale(1.05);
+    /* Scale up on hover */
 }
 
 #registerbtn {
@@ -259,7 +295,8 @@ input[type="password"] {
     border-radius: 10px;
     cursor: pointer;
     margin-top: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition on hover */
 }
 
 #add-update-msg {
@@ -274,18 +311,18 @@ input[type="password"] {
 }
 
 .login-btn-container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
 }
 
 
 .login-btn-container>:last-child {
     position: absolute;
     top: 0;
-  right: 0;
+    right: 0;
 }
 
 
@@ -293,18 +330,19 @@ input[type="password"] {
 /*quiz*/
 /* importing google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Varela Round', sans-serif;
 }
 
-body{
+body {
     background: #475F76;
 }
 
-::selection{
+::selection {
     color: #fff;
     background: #475F76;
 }
@@ -312,25 +350,25 @@ body{
 .start_btn,
 .info_box,
 .quiz_box,
-.result_box{
+.result_box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
-                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .info_box.activeInfo,
 .quiz_box.activeQuiz,
-.result_box.activeResult{
+.result_box.activeResult {
     opacity: 1;
     z-index: 5;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
 }
 
-.start_btn button{
+.start_btn button {
     font-size: 25px;
     font-weight: 500;
     color: #475F76;
@@ -342,7 +380,7 @@ body{
     cursor: pointer;
 }
 
-.info_box{
+.info_box {
     width: 540px;
     background: #fff;
     border-radius: 5px;
@@ -352,7 +390,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.info_box .info-title{
+.info_box .info-title {
     height: 60px;
     width: 100%;
     border-bottom: 1px solid lightgrey;
@@ -364,20 +402,21 @@ body{
     font-weight: 600;
 }
 
-.info_box .info-list{
+.info_box .info-list {
     padding: 15px 30px;
 }
 
-.info_box .info-list .info{
+.info_box .info-list .info {
     margin: 5px 0;
     font-size: 17px;
 }
 
-.info_box .info-list .info span{
+.info_box .info-list .info span {
     font-weight: 600;
     color: #475F76;
 }
-.info_box .buttons{
+
+.info_box .buttons {
     height: 60px;
     display: flex;
     align-items: center;
@@ -386,7 +425,7 @@ body{
     border-top: 1px solid lightgrey;
 }
 
-.info_box .buttons button{
+.info_box .buttons button {
     margin: 0 5px;
     height: 40px;
     width: 100px;
@@ -400,7 +439,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.quiz_box{
+.quiz_box {
     width: 550px;
     background: #fff;
     border-radius: 5px;
@@ -410,7 +449,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.quiz_box header{
+.quiz_box header {
     position: relative;
     z-index: 2;
     height: 70px;
@@ -420,27 +459,31 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 3px 5px 1px rgba(0,0,0,0.1);
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
 }
 
-.quiz_box header .title{
+.quiz_box header .title {
     font-size: 20px;
     font-weight: 600;
 }
 
 .timer_box {
     position: absolute;
-    top: 20px; /* Adjust the top distance according to your design */
+    top: 20px;
+    /* Adjust the top distance according to your design */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    border-radius: 50%; /* Make it a circle by setting border-radius to 50% */
-    overflow: hidden; /* Hide overflow to maintain circular shape */
-    width: 80px; /* Set a fixed width for the circular timer box */
+    border-radius: 50%;
+    /* Make it a circle by setting border-radius to 50% */
+    overflow: hidden;
+    /* Hide overflow to maintain circular shape */
+    width: 80px;
+    /* Set a fixed width for the circular timer box */
 }
 
-.time_line{
+.time_line {
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -452,13 +495,15 @@ body{
 /* Adjust the styling for the timer within the timer box */
 .timer_box .timer {
     background: #004085;
-    
+
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px; /* Adjust the width for a larger circle */
-    height: 60px; /* Adjust the height for a larger circle */
+    width: 60px;
+    /* Adjust the width for a larger circle */
+    height: 60px;
+    /* Adjust the height for a larger circle */
     border-radius: 50%;
     margin-right: 10px;
     margin-left: 10px;
@@ -478,22 +523,22 @@ body{
 
 
 
-section{
+section {
     padding: 25px 30px 20px 30px;
     background: #fff;
 }
 
-section .que_text{
+section .que_text {
     font-size: 25px;
     font-weight: 600;
 }
 
-section .option_list{
+section .option_list {
     padding: 20px 0px;
-    display: block;   
+    display: block;
 }
 
-section .option_list .option{
+section .option_list .option {
     background: aliceblue;
     border: 1px solid #84c5fe;
     border-radius: 5px;
@@ -507,33 +552,33 @@ section .option_list .option{
     justify-content: space-between;
 }
 
-section .option_list .option:last-child{
+section .option_list .option:last-child {
     margin-bottom: 0px;
 }
 
-section .option_list .option:hover{
+section .option_list .option:hover {
     color: #004085;
     background: #cce5ff;
     border: 1px solid #b8daff;
 }
 
-section .option_list .option.correct{
+section .option_list .option.correct {
     color: #155724;
     background: #d4edda;
     border: 1px solid #c3e6cb;
 }
 
-section .option_list .option.incorrect{
+section .option_list .option.incorrect {
     color: #721c24;
     background: #f8d7da;
     border: 1px solid #f5c6cb;
 }
 
-section .option_list .option.disabled{
+section .option_list .option.disabled {
     pointer-events: none;
 }
 
-section .option_list .option .icon{
+section .option_list .option .icon {
     height: 26px;
     width: 26px;
     border: 2px solid transparent;
@@ -544,19 +589,20 @@ section .option_list .option .icon{
     transition: all 0.3s ease;
     line-height: 24px;
 }
-.option_list .option .icon.tick{
+
+.option_list .option .icon.tick {
     color: #23903c;
     border-color: #23903c;
     background: #d4edda;
 }
 
-.option_list .option .icon.cross{
+.option_list .option .icon.cross {
     color: #a42834;
     background: #f8d7da;
     border-color: #a42834;
 }
 
-footer{
+footer {
     height: 60px;
     padding: 0 30px;
     display: flex;
@@ -565,21 +611,21 @@ footer{
     border-top: 1px solid lightgrey;
 }
 
-footer .total_que span{
+footer .total_que span {
     display: flex;
     user-select: none;
 }
 
-footer .total_que span p{
+footer .total_que span p {
     font-weight: 500;
     padding: 0 5px;
 }
 
-footer .total_que span p:first-child{
+footer .total_que span p:first-child {
     padding-left: 0px;
 }
 
-footer button{
+footer button {
     height: 40px;
     padding: 0 13px;
     font-size: 18px;
@@ -598,17 +644,17 @@ footer button{
     transition: all 0.3s ease;
 }
 
-footer button:hover{
+footer button:hover {
     background: #0263ca;
 }
 
-footer button.show{
+footer button.show {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
 }
 
-.result_box{
+.result_box {
     background: #fff;
     border-radius: 5px;
     display: flex;
@@ -623,35 +669,35 @@ footer button.show{
     transition: all 0.3s ease;
 }
 
-.result_box .icon{
+.result_box .icon {
     font-size: 100px;
     color: #475F76;
     margin-bottom: 10px;
 }
 
-.result_box .complete_text{
+.result_box .complete_text {
     font-size: 20px;
     font-weight: 500;
 }
 
-.result_box .score_text span{
+.result_box .score_text span {
     display: flex;
     margin: 10px 0;
     font-size: 18px;
     font-weight: 500;
 }
 
-.result_box .score_text span p{
+.result_box .score_text span p {
     padding: 0 4px;
     font-weight: 600;
 }
 
-.result_box .buttons{
+.result_box .buttons {
     display: flex;
     margin: 20px 0;
 }
 
-.result_box .buttons button{
+.result_box .buttons button {
     margin: 0 10px;
     height: 45px;
     padding: 0 20px;
@@ -665,22 +711,21 @@ footer button.show{
     transition: all 0.3s ease;
 }
 
-.buttons button.restart{
+.buttons button.restart {
     color: #fff;
     background: #475F76;
 }
 
-.buttons button.restart:hover{
+.buttons button.restart:hover {
     background: #0263ca;
 }
 
-.buttons button.quit{
+.buttons button.quit {
     color: #475F76;
     background: #fff;
 }
 
-.buttons button.quit:hover{
+.buttons button.quit:hover {
     color: #fff;
     background: #475F76;
 }
-

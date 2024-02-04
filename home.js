@@ -4,79 +4,141 @@
 
 document.addEventListener("DOMContentLoaded", SetupHome);
 
-function SetupHome() {
-    document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
-    addQuizObjects();
+const subsearch = document.getElementById("search-bar-input");
+subsearch.addEventListener('keypress', submitSearchReturn);
+
+function submitSearchReturn(e) {
+  if (e.key === 'Enter') {
+    searchQuiz();
+  }
 }
 
-const quizArray = [];
+function SetupHome() {
+  document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
+  getQuizObjects();
+}
+
+const jsonQuizArray = { quizDetails: [] };
 
 // grab quiz details from api and then create a quiz object per quiz grabbed and add to quizArray
-function addQuizObjects() {
+async function getQuizObjects() {
 
   const APIKEY = "6593f49e3ea4be628deb6cfa";
 
   let settings = {
     method: 'GET',
     headers: {
-    // Specify the content type as JSON
-    // You can include additional headers if needed
-    // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-    'Content-Type': 'application/json', 
-    "x-apikey": APIKEY,
-    "Cache-Control": "no-cache"
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "Cache-Control": "no-cache"
     },
   }
 
   // fetch data and check if password valid
-  //fetch from quiz and create quiz object based on api info
-  fetch(`https://mydatabase-c3eb.restdb.io/rest/quiz`,settings)
-  .then(response => response.json())
-  .then(response => {
-    console.log(response);
-    quizDetails = response;
-    displayQuizObjects(quizDetails);
-  })
-  .catch(error => {
-    // Handle errors here
-    console.error('Error get request failed:', error);;
-  });
+  // fetch from quiz and create quiz object based on api info
+  await fetch(`https://mydatabase-c3eb.restdb.io/rest/quiz`, settings)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      initQuizArray(response);
+      displayQuizObjects(jsonQuizArray.quizDetails);
+    })
+    .catch(error => { console.error('Error get request failed:', error); });
+
+
 }
 
-function displayQuizObjects (apiObject) {
-  var quizCount = apiObject.length;
+// put quiz data from json object into jsonquizArray.quizDetails
+function initQuizArray(apiObject) {
+  let quizCount = apiObject.length;
+  console.log("number of quizes " + quizCount)
+
+  for (let i = 0; i < quizCount; i++) {
+
+    var quizExists = jsonQuizArray.quizDetails.filter(obj => {
+      return obj.quizid == apiObject[i].quizid
+    })
+
+    if (quizExists == false) {
+      jsonQuizArray.quizDetails.push({
+        "quizid": apiObject[i].quizid,
+        "quizimglink": apiObject[i].quizimglink,
+        "quizname": apiObject[i].quizname,
+        "quizdesc": apiObject[i].quizdesc
+      });
+    }
+  }
+}
+
+// it will create and dispay quizzes in the homepage
+function displayQuizObjects(jsonObject) {
+  var quizCount = jsonObject.length;
   console.log(quizCount);
-  let Content = document.getElementById("content");
+  var Content = document.getElementById("content");
 
-  for (var i = 0; i < quizCount; i++) {
+  for (let i = 0; i < quizCount; i++) {
 
-    let newQuizDiv = document.createElement("div");
+    // create elements + add classes
+    var newQuizDiv = document.createElement("div");
     newQuizDiv.classList.add("quiz-box");
 
-    // great now we have to fetch the image really RESTDB??
+    var newQuizImgDiv = document.createElement("div");
+    newQuizImgDiv.classList.add("quiz-box-div");
 
-    let newQuizImg = document.createElement("img");
-    console.log(apiObject[i].quizimglink);
+    var newQuizImg = document.createElement("img");
+    console.log(jsonObject[i].quizimglink);
 
-    if (apiObject[i].quizimglink != null) {
-      newQuizImg.src = apiObject[i].quizimglink;
+    if (jsonObject[i].quizimglink != null) {
+      newQuizImg.src = jsonObject[i].quizimglink;
+
+      // responsive css circular portrait for wide/tall images
+      if (newQuizImg.height > newQuizImg.width) {
+        newQuizImgDiv.classList.add("centeredvert");
+      } else {
+        newQuizImgDiv.classList.add("centeredhori")
+      }
     }
     else {
       // ideally will use default img
     }
 
+    // frankenstein them together
     newQuizImg.alt = "Quiz Icon";
-    newQuizDiv.appendChild(newQuizImg);
+    newQuizImgDiv.appendChild(newQuizImg);
+    newQuizDiv.appendChild(newQuizImgDiv);
 
-    let newQuizName = document.createElement("h3");
-    newQuizName.appendChild(document.createTextNode(apiObject[i].quizname));
+    var newQuizName = document.createElement("h3");
+    newQuizName.appendChild(document.createTextNode(jsonObject[i].quizname));
     newQuizDiv.appendChild(newQuizName);
 
-    let newQuizDesc = document.createElement("p");
-    newQuizDesc.appendChild(document.createTextNode(apiObject[i].quizdesc));
+    var newQuizDesc = document.createElement("p");
+    newQuizDesc.appendChild(document.createTextNode(jsonObject[i].quizdesc));
     newQuizDiv.appendChild(newQuizDesc);
 
-    Content.appendChild(newQuizDiv)
+    Content.appendChild(newQuizDiv);
 
   }
 }
+
+// search function to... search what did u expect?
+function searchQuiz() {
+  var quizName = document.getElementById("search-bar-input").value;
+  var tempJson = { array: [] }
+  var quizDetails = jsonQuizArray.quizDetails;
+
+  for (let i = 0; i < quizDetails.length; i++) {
+    let name = quizDetails[i].quizname;
+    console.log(name.includes(quizName));
+    if (name.includes(quizName)) {
+      tempJson.array.push({
+        "quizid": quizDetails[i].quizid,
+        "quizimglink": quizDetails[i].quizimglink,
+        "quizname": quizDetails[i].quizname,
+        "quizdesc": quizDetails[i].quizdesc
+      });
+    }
+  }
+  document.getElementById("content").innerHTML = "";
+  displayQuizObjects(tempJson.array)
+}
+
