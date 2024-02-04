@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style> /*im just gonna temporarily leave the style here*/
+        #leaderboard-title {
+            background-color: #15314B;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .round-rectangle {
+            background-color: #8ca8b6;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .leaderboard-tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .leaderboard-tab {
+            background-color: #213D57;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .leaderboard-tab.active {
+            background-color: #C6D1D8;
+            color: #213D57;
+        }
+
+        #leaderboard-columns {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .leaderboard-column {
+            flex: 1;
+            text-align: center;
+            margin: 0 20px;
+        }
+
+        .leaderboard-username {
+            margin-top: 10px;
+        }
+
+        #leaderboard-list {
+            overflow-y: auto;
+            max-height: 400px;
+            margin-top: 20px;
+        }
+
+        .leaderboard-item {
+            background-color: #DBDFE1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="leaderboard-title">LEADERBOARD</div>
+
+    <div class="round-rectangle">
+        <div class="leaderboard-tabs">
+            <div class="leaderboard-tab active" onclick="changeTab('All')">All</div>
+            <div class="leaderboard-tab" onclick="changeTab('Month')">Month</div>
+            <div class="leaderboard-tab" onclick="changeTab('Week')">Week</div>
+        </div>
+    </div>
+
+    <div id="leaderboard-columns">
+        <div class="leaderboard-column">
+            <div class="round-rectangle">
+                <div class="leaderboard-item">
+                    <div>1st Place</div>
+                    <div id="all-time-score">Score</div>
+                </div>
+                <div class="leaderboard-username" id="all-time-username">Username</div>
+            </div>
+        </div>
+
+        <div class="leaderboard-column">
+            <div class="round-rectangle">
+                <div class="leaderboard-item">
+                    <div>2nd Place</div>
+                    <div id="monthly-score">Score</div>
+                </div>
+                <div class="leaderboard-username" id="monthly-username">Username</div>
+            </div>
+        </div>
+
+        <div class="leaderboard-column">
+            <div class="round-rectangle">
+                <div class="leaderboard-item">
+                    <div>3rd Place</div>
+                    <div id="weekly-score">Score</div>
+                </div>
+                <div class="leaderboard-username" id="weekly-username">Username</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="leaderboard-list">
+        <!-- Dynamic content will be added here based on selected tab -->
+    </div>
+
+    <script src="leaderboardscript.js"></script>
+</body>
+
+</html>
