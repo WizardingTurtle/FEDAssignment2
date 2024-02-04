@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
     <link rel="stylesheet" href="style.css">
-    <style> /*im just gonna temporarily leave the style here*/
+    <style>
         #leaderboard-title {
             background-color: #15314B;
             color: white;
@@ -125,6 +125,55 @@
     </div>
 
     <script src="leaderboardscript.js"></script>
+    <script>
+        // Mock function to simulate quiz completion
+        function quizCompleted() {
+            // Mock user data
+            const userScore = 120;
+            const username = "User123";
+
+            // Mock RestDB API endpoint
+            const apiUrl = 'YOUR_RESTDB_API_ENDPOINT'; // Replace with your actual RestDB API endpoint
+
+            // Update the leaderboard with the user's data
+            updateLeaderboard(apiUrl, { username, score: userScore });
+        }
+
+        // Update the updateLeaderboard function to handle updating the leaderboard with user data
+        async function updateLeaderboard(apiUrl, userData) {
+            try {
+                // Send a POST request to update the leaderboard with the user's data
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update leaderboard');
+                }
+
+                // Once the leaderboard is updated, refresh the displayed data
+                const tabElement = document.querySelector('.leaderboard-tab.active');
+                updateLeaderboard(apiUrl + '/' + getTabType(tabElement));
+            } catch (error) {
+                console.error('Error updating leaderboard:', error);
+            }
+        }
+
+        // Function to get the type of tab (e.g., 'all', 'month', 'week')
+        function getTabType(tabElement) {
+            if (tabElement === allTimeTab) {
+                return 'all';
+            } else if (tabElement === monthlyTab) {
+                return 'month';
+            } else if (tabElement === weeklyTab) {
+                return 'week';
+            }
+        }
+    </script>
 </body>
 
 </html>
