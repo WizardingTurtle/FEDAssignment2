@@ -9,76 +9,22 @@ const subform = document.getElementById("loginbtn");
 subform.addEventListener("click", submitFormReturn, false)
 
 // validate form data and registers account and jump to homepage
-async function submitFormReturn(event) {
+function submitFormReturn(event) {
+
     document.getElementById("add-update-msg").style.display = "none"
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     let passwordConfirm = document.getElementById("passwordconfirm").value;
+    event.preventDefault();
     console.log("sfr- validateusername is called");
     if (validateUsername(username)) {
         console.log("sfr- confirmPassword is called");
         if (confirmPassword(password, passwordConfirm)) {
+            // registerAccount handles check for existing username + successful registration + jumping to homepage 
             console.log("sfr- registerAccount is called");
             registerAccount(username, password);
-
-            // delay function check since api takes a while
-
-            console.log("sfr- registerSuccesful is called");
-            let success = registerSuccessful(username);
-            console.log("sfr- success data is logged" + success);
-            if (success == true) {
-                // jumps to homepage if form validation and registration are successful
-                window.location.assign("./homepage.html");
-                console.log("it done");
-            }
-
         }
     }
-    event.preventDefault();
-}
-
-async function fetchQueryUsername(Usernamer) {
-    let success = false;
-
-    let settings = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "x-apikey": APIKEY,
-            "Cache-Control": "no-cache"
-        },
-    }
-
-    console.log("fqu-get response occurs")
-    return fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Usernamer}"}`, settings)
-        .then(response => response.json())
-        .then(response => {// check if account does not exist else cancel post request
-            console.log(response);
-
-            var size = Object.keys(response).length
-            if (size > 0) {
-                success = true;
-                console.log("success set to true");
-                console.log(success);
-            }
-            console.log("fqu- success is " + success);
-            console.log("fqu- process ends within fetch");
-            return success;
-        })
-        .catch(error => {
-            // Handle errors here
-            console.error('Error get request failed:', error);
-            document.getElementById("add-update-msg").innerText = "GET REQUEST FAILED MISERABLY";
-            document.getElementById("add-update-msg").style.display = "inline";
-        });
-
-}
-// checks and returns true if username exists in database
-async function registerSuccessful(Username) {
-    let success = false;
-    success = fetchQueryUsername(Username);
-    console.log("rs- success is " + success);
-    return success;
 }
 
 // runs functions that will start on page load
@@ -86,7 +32,7 @@ function setupRegister() {
     hideMe();
 }
 
-// hide elements
+// hide elements - add more if needed
 function hideMe() {
     document.getElementById("add-update-msg").style.display = "none";
 }
@@ -94,6 +40,12 @@ function hideMe() {
 // returns true for string containing number
 function hasNumber(str) {
     return /\d/.test(str);
+}
+
+// returns true for strings containing special char
+function containsSpecialChars(str) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
 }
 
 // checks for 3 conditions to return true
@@ -124,12 +76,19 @@ function confirmPassword(password, passwordConfirm) {
     return false;
 }
 
-// checks if username is at least 3 characters long
+// checks if username is at least 3 characters long & has no special characters else return false
 function validateUsername(Username) {
     console.log("vu- process starts");
     if (Username.length >= 3) {
-        console.log("vu- process ends");
-        return true;
+        if (containsSpecialChars(Username) == false) {
+            console.log("vu- process ends");
+            return true;
+        } else {
+            document.getElementById("add-update-msg").innerText = "Username cannot contain special characters";
+            document.getElementById("add-update-msg").style.display = "inline";
+            console.log("vu- process ends");
+            return false;
+        }
     } else {
         document.getElementById("add-update-msg").innerText = "Username needs to be at least 3 characters long";
         document.getElementById("add-update-msg").style.display = "inline";
@@ -175,12 +134,13 @@ async function registerAccount(Username, Password) {
                     body: JSON.stringify(jsondata),
                 }
 
-                // do a post request
+                // do a post request to create account
                 console.log("ra-post response occurs")
                 fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts`, settings)
                     .then(response => response.json())
                     .then(response => {
-                        console.log("post has been sent")
+                        console.log("post has been sent");
+                        console.log(response);
 
                         // init username if not done yet
                         if (sessionStorage.getItem("Username") === null) {
