@@ -9,13 +9,17 @@ subsearch.addEventListener('keypress', submitSearchReturn);
 
 function submitSearchReturn(e) {
   if (e.key === 'Enter') {
+    showLoadingAnimation();
     searchQuiz();
   }
 }
 
 function SetupHome() {
+  showLoadingAnimation();
   document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
-  getQuizObjects();
+  getQuizObjects().then(() => {
+    hideLoadingAnimation();
+  });
 }
 
 const jsonQuizArray = { quizDetails: [] };
@@ -118,6 +122,14 @@ function displayQuizObjects(jsonObject) {
     Content.appendChild(newQuizDiv);
 
   }
+}
+
+function showLoadingAnimation() {
+  document.getElementById("loading-animation").style.display = "block";
+}
+
+function hideLoadingAnimation() {
+  document.getElementById("loading-animation").style.display = "none";
 }
 
 // search function to... search what did u expect?
