@@ -13,9 +13,10 @@ function submitSearchReturn(e) {
   }
 }
 
-function SetupHome() {
+async function SetupHome() {
   document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
-  getQuizObjects();
+  await getQuizObjects();
+  displayQuizObjects(jsonQuizArray.quizDetails);
 }
 
 const jsonQuizArray = { quizDetails: [] };
@@ -23,7 +24,7 @@ const jsonQuizArray = { quizDetails: [] };
 // grab quiz details from api and then create a quiz object per quiz grabbed and add to quizArray
 async function getQuizObjects() {
 
-  const APIKEY = "6593f49e3ea4be628deb6cfa";
+  const APIKEY = "65c099ce00d3da1e0863a2dd";
 
   let settings = {
     method: 'GET',
@@ -36,12 +37,11 @@ async function getQuizObjects() {
 
   // fetch data and check if password valid
   // fetch from quiz and create quiz object based on api info
-  await fetch(`https://mydatabase-c3eb.restdb.io/rest/quiz`, settings)
+  await fetch(`https://firestoredb-a218.restdb.io/rest/quiz`, settings)
     .then(response => response.json())
     .then(response => {
       console.log(response);
       initQuizArray(response);
-      displayQuizObjects(jsonQuizArray.quizDetails);
     })
     .catch(error => { console.error('Error get request failed:', error); });
 
@@ -92,13 +92,14 @@ function displayQuizObjects(jsonObject) {
       newQuizImg.src = jsonObject[i].quizimglink;
 
       // responsive css circular portrait for wide/tall images
+      console.log(newQuizImg.height, newQuizImg.width)
       if (newQuizImg.height > newQuizImg.width) {
         newQuizImgDiv.classList.add("centeredvert");
       } else {
         newQuizImgDiv.classList.add("centeredhori")
       }
     }
-    else {
+    else {  
       // ideally will use default img
     }
 
