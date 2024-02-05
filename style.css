@@ -469,59 +469,50 @@ body {
 
 .timer_box {
     position: absolute;
-    top: 20px;
-    /* Adjust the top distance according to your design */
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     border-radius: 50%;
-    /* Make it a circle by setting border-radius to 50% */
     overflow: hidden;
-    /* Hide overflow to maintain circular shape */
-    width: 80px;
-    /* Set a fixed width for the circular timer box */
+    width: 150px;
+    height: 130px;
+    z-index: 6; /* Set a higher z-index to make it appear above the quiz box */
 }
 
-.time_line {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 3px;
-    background: #475F76;
-}
-
-/* Adjust the styling for the timer within the timer box */
-/* Adjust the styling for the timer within the timer box */
 .timer_box .timer {
     background: #004085;
-
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    /* Adjust the width for a larger circle */
-    height: 60px;
-    /* Adjust the height for a larger circle */
+    width: 100%; /* Ensuring the circle is uniform */
+    height: 100%; /* Ensuring the circle is uniform */
     border-radius: 50%;
     margin-right: 10px;
     margin-left: 10px;
 }
 
 .timer .timer_sec {
-    font-size: 18px;
+    font-size: 28px;
     font-weight: 500;
     height: 30px;
     width: 45px;
     color: #fff;
-    border-radius: 5px;
+    
     line-height: 30px;
     text-align: center;
     user-select: none;
 }
 
-
+.time_line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #475F76;
+}
 
 section {
     padding: 25px 30px 20px 30px;
@@ -609,6 +600,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid lightgrey;
+    position: relative; /* Added position relative to establish a positioning context */
 }
 
 footer .total_que span {
@@ -625,18 +617,23 @@ footer .total_que span p:first-child {
     padding-left: 0px;
 }
 
-footer button {
-    height: 40px;
-    padding: 0 13px;
+.quiznext {
+    position: absolute;
+    top: 470px;
+}
+
+.quiznext button {
+    height: 60px;
+    width: 550px;
+    padding: 0 30px;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     cursor: pointer;
     border: none;
     outline: none;
     color: #fff;
     border-radius: 5px;
-    background: #475F76;
-    border: 1px solid #475F76;
+    background: #b8daff;
     line-height: 10px;
     opacity: 0;
     pointer-events: none;
@@ -644,11 +641,11 @@ footer button {
     transition: all 0.3s ease;
 }
 
-footer button:hover {
-    background: #0263ca;
+.quiznext button:hover {
+    background: #014894;
 }
 
-footer button.show {
+.quiznext button.show {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
@@ -728,4 +725,68 @@ footer button.show {
 .buttons button.quit:hover {
     color: #fff;
     background: #475F76;
+}
+
+#leaderboard-title {
+    background-color: #15314B;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+
+
+
+#leaderboard-columns {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.leaderboard-column {
+    flex: 1;
+    text-align: center;
+    margin: 0 20px;
+}
+
+.leaderboard-username {
+    margin-top: 10px;
+}
+
+#leaderboard-list {
+    overflow-y: auto;
+    max-height: 400px;
+    margin-top: 20px;
+}
+
+.leaderboard-item {
+    background-color: #DBDFE1;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#back-to-home {
+    margin-top: 20px;
+    text-align: center;
+    
+}
+
+.returnhome-button {
+    background-color: #213D57;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition on hover */
+}
+
+.returnhome-button:hover {
+    background-color: #C6D1D8;
+    transform: scale(1.05);
 }

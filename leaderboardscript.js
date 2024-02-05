@@ -6,10 +6,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const leaderboardList = document.getElementById("leaderboard-list");
-    const allTimeTab = document.querySelector(".leaderboard-tab:nth-child(1)");
-
-    const monthlyTab = document.querySelector(".leaderboard-tab:nth-child(2)");
-    const weeklyTab = document.querySelector(".leaderboard-tab:nth-child(3)");
 
     // initilize settings for GET request
     // API key
@@ -52,6 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch(apiUrl, settings);
             const data = await response.json();
 
+            // Sort the data array from highest to lowest score
+            data.sort((a, b) => b.score - a.score);
+
             // Clear existing leaderboard list
             leaderboardList.innerHTML = "";
 
@@ -72,11 +71,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(item.score);
                 const leaderboardItem = document.createElement("div");
                 leaderboardItem.className = "leaderboard-item";
+
+                // Use nth-child() to apply color based on ranking
+                leaderboardItem.style.backgroundColor = getRankingColor(i + 1);
+
                 leaderboardItem.innerHTML = `
-                    <div>${i + 1}. ${item.username}</div>
+                    <div>${getRankText(i + 1)}</div>
                     <div>${item.score} points</div>
                 `;
                 leaderboardList.appendChild(leaderboardItem);
+
+                // Update specific place on the leaderboard
+                if (i === 0) {
+                    document.getElementById("all-time-score").textContent = item.score;
+                    document.getElementById("all-time-username").textContent = item.username;
+                } else if (i === 1) {
+                    document.getElementById("monthly-score").textContent = item.score;
+                    document.getElementById("monthly-username").textContent = item.username;
+                } else if (i === 2) {
+                    document.getElementById("weekly-score").textContent = item.score;
+                    document.getElementById("weekly-username").textContent = item.username;
+                }
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -84,14 +99,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /*
-    function setActiveTab(tabElement) {
-        // Remove active class from all tabs
-        document.querySelectorAll(".leaderboard-tab").forEach(tab => {
-            tab.classList.remove("active");
-        });
+    function getRankingColor(rank) {
+        switch (rank) {
+            case 1:
+                return 'gold';
+            case 2:
+                return '#c0c0c0';
+            case 3:
+                return '#cd7f32';
+            default:
+                return '#DBDFE1'; // Default color for other ranks
+        }
+    }
 
-        // Add active class to the selected tab
-        tabElement.classList.add("active");
+    function getRankText(rank) {
+        switch (rank) {
+            case 1:
+                return '1st Place';
+            case 2:
+                return '2nd Place';
+            case 3:
+                return '3rd Place';
+            default:
+                return `${rank}th Place`;
+        }
     }   
     */
 });

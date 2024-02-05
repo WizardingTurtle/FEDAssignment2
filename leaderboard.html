@@ -5,76 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        #leaderboard-title {
-            background-color: #15314B;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 24px;
-        }
-
-        .round-rectangle {
-            background-color: #8ca8b6;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .leaderboard-tabs {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .leaderboard-tab {
-            background-color: #213D57;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 15px 15px 0 0;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-
-        .leaderboard-tab.active {
-            background-color: #C6D1D8;
-            color: #213D57;
-        }
-
-        #leaderboard-columns {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .leaderboard-column {
-            flex: 1;
-            text-align: center;
-            margin: 0 20px;
-        }
-
-        .leaderboard-username {
-            margin-top: 10px;
-        }
-
-        #leaderboard-list {
-            overflow-y: auto;
-            max-height: 400px;
-            margin-top: 20px;
-        }
-
-        .leaderboard-item {
-            background-color: #DBDFE1;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
 </head>
 
 <body>
@@ -127,6 +62,10 @@
         <!-- Dynamic content will be added here based on selected tab -->
     </div>
 
+    <div id="back-to-home">
+        <button class="returnhome-button" onclick="goToHomePage()">Back to Home</button>
+    </div>
+
     <script src="leaderboardscript.js"></script>
     <script>
         // Mock function to simulate quiz completion
@@ -166,15 +105,8 @@
             }
         }
 
-        // Function to get the type of tab (e.g., 'all', 'month', 'week')
-        function getTabType(tabElement) {
-            if (tabElement === allTimeTab) {
-                return 'all';
-            } else if (tabElement === monthlyTab) {
-                return 'month';
-            } else if (tabElement === weeklyTab) {
-                return 'week';
-            }
+        function goToHomePage() {
+            window.location.href = 'homepage.html';
         }
     </script>
 </body>
