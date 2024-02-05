@@ -4,7 +4,7 @@ const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
 const continue_btn = info_box.querySelector(".buttons .restart");
 const quiz_box = document.querySelector(".quiz_box");
-const timer_box = document.querySelector(".timer_box")
+const timer_feature = document.querySelector(".timer")
 const result_box = document.querySelector(".result_box");
 const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector("header .time_line");
@@ -12,9 +12,7 @@ const timeText = document.querySelector(".timer .time_left");
 const timeCount = document.querySelector(".timer .timer_sec");
 
 // Hiding the timer initially
-timeCount.style.display = "none";
-timeText.style.display = "none";
-timer_box.style.display = "none";
+timer_feature.style.display = "none";
 
 
 // if startQuiz button clicked
@@ -24,7 +22,7 @@ start_btn.onclick = ()=>{
 
 // if exitQuiz button clicked
 exit_btn.onclick = ()=>{
-    info_box.classList.remove("activeInfo"); //hide info box
+    window.location.href = "homepage.html";
 }
 
 // if continueQuiz button clicked
@@ -67,8 +65,8 @@ restart_quiz.onclick = ()=>{
 }
 
 // if quitQuiz button clicked
-quit_quiz.onclick = ()=>{
-    window.location.reload(); //reload the current window
+quit_quiz.onclick = () => {
+    window.location.href = "homepage.html";
 }
 
 const next_btn = document.querySelector(".quiznext .next_btn");
@@ -106,9 +104,8 @@ function showQuestions(index){
     que_text.innerHTML = que_tag; //adding new span tag inside que_tag
     option_list.innerHTML = option_tag; //adding new div tag inside option_tag
     // Showing the timer when showQuestions is called
-    timeText.style.display = "block";
-    timeCount.style.display = "block";
-    timer_box.style.display = "block";
+
+    timer_feature.style.display = "flex";
     
     const option = option_list.querySelectorAll(".option");
 
