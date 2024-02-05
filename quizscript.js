@@ -7,7 +7,7 @@ const quiz_box = document.querySelector(".quiz_box");
 const result_box = document.querySelector(".result_box");
 const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector("header .time_line");
-const timeText = document.querySelector(".timer .time_left_txt");
+const timeText = document.querySelector(".timer .time_left");
 const timeCount = document.querySelector(".timer .timer_sec");
 
 // if startQuiz button clicked
@@ -56,7 +56,6 @@ restart_quiz.onclick = ()=>{
     clearInterval(counterLine); //clear counterLine
     startTimer(timeValue); //calling startTimer function
     startTimerLine(widthValue); //calling startTimerLine function
-    timeText.textContent = "Time Left"; //change the text of timeText to Time Left
     next_btn.classList.remove("show"); //hide the next button
 }
 
@@ -176,7 +175,6 @@ function startTimer(time){
         }
         if(time < 0){ //if timer is less than 0
             clearInterval(counter); //clear counter
-            timeText.textContent = "Time Off"; //change the time text to time off
             const allOptions = option_list.children.length; //getting all option items
             let correcAns = questions[que_count].answer; //getting correct answer from array
             for(i=0; i < allOptions; i++){
