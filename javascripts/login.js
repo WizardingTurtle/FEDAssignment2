@@ -30,21 +30,32 @@ function validateAccount(DBpassword, Password) {
   if (DBpassword == Password) {
     // store user credentials in session storage to make pulling info easier
     sessionStorage.setItem('Username', document.getElementById("username").value);
-    window.location.assign("./homepage.html")
+    window.location.assign("../HTML/homepage.html")
     //ideally will remember login credentials throughout the website
   }
   else {
     document.getElementById("add-update-msg").innerText = "LOGIN FAILED: Incorrect Password";
-        document.getElementById("add-update-msg").style.display = "inline";
+    document.getElementById("add-update-msg").style.display = "inline";
   }
 }
 
 // verify account details function - uses GET request
 function verifyLogin() {
+  document.getElementById("add-update-msg").style.display = "none";
 
   let Username = document.getElementById("username").value;
   let Password = document.getElementById("password").value;
 
+  // if either conditions occur stop function to avoid unecessary api calls
+  if (Username.length < 2) {
+    document.getElementById("add-update-msg").innerText = "LOGIN FAILED: Invalid Username";
+    document.getElementById("add-update-msg").style.display = "inline";
+    return;
+  } else if (Password.length < 3) {
+    document.getElementById("add-update-msg").innerText = "LOGIN FAILED: Invalid Password";
+    document.getElementById("add-update-msg").style.display = "inline";
+    return;
+  } 
 
   console.log(Username);
 
@@ -57,9 +68,6 @@ function verifyLogin() {
   let settings = {
     method: 'GET',
     headers: {
-      // Specify the content type as JSON
-      // You can include additional headers if needed
-      // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
       'Content-Type': 'application/json',
       "x-apikey": APIKEY,
       "Cache-Control": "no-cache"

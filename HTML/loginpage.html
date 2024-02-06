@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
 
   <body class="no-scroll">
@@ -20,7 +20,7 @@
     <div id="darktriangle"></div>
 
     <div id="login-bar">
-      <div class="round-rectangle">
+      <div id="login-bar-box" class="round-rectangle">
         
         <div id="login-text">LOGIN</div>
         <form id="form">
@@ -32,17 +32,17 @@
 
           <div class="login-btn-container">
             <div><input id="loginbtn" type="submit" value="LOGIN" /></div>
-            <div> Don't have an account?
-              <a
-                id="registerbtn"
-                type="text"
-                value="REGISTER"
-                onclick="location.assign('registerpage.html')"
-                >Register here
-              </a>
-            </div>
           </div>
         </form>
+      </div>
+      <div> Don't have an account?
+        <a
+          id="registerbtn"
+          type="text"
+          value="REGISTER"
+          onclick="location.assign('./registerpage.html')"
+          >Register here
+        </a>
       </div>
     </div>
 
@@ -52,6 +52,6 @@
       <span id="add-update-msg"></span>
     </div>
 
-    <script src="login.js"></script>
+    <script src="../javascripts/login.js"></script>
   </body>
 </html>

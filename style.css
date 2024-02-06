@@ -23,8 +23,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
+    flex-grow: 1;
 }
 
+#greeting-bar>:last-child {
+    position: absolute;
+    right: 5vw;
+    background-color: #213D57;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
 #user-icon {
     width: 35px;
@@ -84,6 +96,7 @@ body {
     text-align: justify;
     color: white;
     font-size: 40px;
+    text-shadow: 2px 3px 1vw #15314B ;
 }
 
 #footer {
@@ -115,7 +128,6 @@ body {
 
 #triangle-container {
     position: relative;
-
     overflow: hidden;
 }
 
@@ -123,7 +135,6 @@ body {
     width: 100%;
     height: 50px;
     border-left: 100vw solid transparent;
-
     border-top: 50px solid #C6D1D8;
 }
 
@@ -166,29 +177,43 @@ body {
 }
 
 .quiz-box {
+    display: flex;
     flex: 0 0 calc(50% - 20px);
     /* Adjust the width as needed, considering margins */
     margin: 10px;
     padding: 15px;
     border: 1px solid #ecf0f1;
     background-color: #DBDFE1;
+    background-image: linear-gradient(to right, #475F76 150px, rgba(0,0,0,0) 20%);
     border-radius: 10px;
     cursor: pointer;
     box-sizing: border-box;
+    box-shadow: 0px 0.5vh 1vw #1a252f;
 }
 
 .quiz-box-div {
     position: relative;
     height: 120px;
     width: 120px;
+
+    flex-shrink: 0;
+
+    max-height: 120px;
+    max-width: 120px;
+
     overflow: hidden;
     border-radius: 100%;
+    flex-grow: 1;
+    margin-right: 20px;
+
+    box-shadow: 2px 3px 10px black;
 }
 
 .quiz-box-div img {
     position: absolute;
     height: auto;
     max-width: 100%;
+    
 }
 
 .centeredvert img {
@@ -236,6 +261,11 @@ body {
     color: white;
     padding: 10px;
     text-align: center;
+}
+
+#login-bar-box {
+    max-width: 50vw;
+    margin-left: 25%;
 }
 
 .round-rectangle {
@@ -317,15 +347,6 @@ input[type="password"] {
     justify-content: center;
 
 }
-
-
-.login-btn-container>:last-child {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-
 
 /*quiz*/
 
@@ -786,11 +807,12 @@ section .option_list .option .icon {
 
 #leaderboard-list {
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 40vh;
     margin-top: 20px;
 }
 
 .leaderboard-item {
+    position: relative;
     background-color: #DBDFE1;
     padding: 10px;
     margin: 5px 0;

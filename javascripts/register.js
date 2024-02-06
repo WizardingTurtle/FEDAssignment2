@@ -42,6 +42,10 @@ function hasNumber(str) {
     return /\d/.test(str);
 }
 
+function hasLetter(str) {
+    return /[a-zA-Z]/.test(str);
+}
+
 // returns true for strings containing special char
 function containsSpecialChars(str) {
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -58,15 +62,19 @@ function confirmPassword(password, passwordConfirm) {
     console.log(passwordConfirm)
 
     if (password.length >= 8) {
-        if (hasNumber(password)) {
+        if (hasNumber(password) && hasLetter(password)) {
             if (password == passwordConfirm) {
                 console.log("cp- process ends");
                 return true;
             } else {
                 document.getElementById("add-update-msg").innerText = "Passwords do not match!";
             }
-        } else {
+        } else if (hasNumber(password)) {
+            document.getElementById("add-update-msg").innerText = "Password needs to have at least 1 letter";
+        } else if (hasLetter(password)) {
             document.getElementById("add-update-msg").innerText = "Password needs to have at least 1 number";
+        } else {
+            document.getElementById("add-update-msg").innerText = "Password needs to have numbers and letters";
         }
     } else {
         document.getElementById("add-update-msg").innerText = "Password needs to be at least 8 characters long";
@@ -81,8 +89,15 @@ function validateUsername(Username) {
     console.log("vu- process starts");
     if (Username.length >= 3) {
         if (containsSpecialChars(Username) == false) {
-            console.log("vu- process ends");
+            if (hasLetter(Username)) {
+                console.log("vu- process ends");
             return true;
+            } else {
+                document.getElementById("add-update-msg").innerText = "Username must have a letter";
+                document.getElementById("add-update-msg").style.display = "inline";
+                console.log("vu- process ends");
+                return false;
+            }
         } else {
             document.getElementById("add-update-msg").innerText = "Username cannot contain special characters";
             document.getElementById("add-update-msg").style.display = "inline";

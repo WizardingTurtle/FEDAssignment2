@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
 
   <body class="no-scroll">
@@ -21,7 +21,7 @@
     <div id="darktriangle"></div>
 
     <div id="login-bar">
-      <div class="round-rectangle">
+      <div  id="login-bar-box" class="round-rectangle">
 
         <div id="login-text">REGISTER</div>
         <form id="form">
@@ -36,23 +36,21 @@
 
           <div class="login-btn-container">
             <div><input id="loginbtn" type="submit" value="SIGN UP"></div>
-            <div> Already have an account?
-            <a
-              id="loginbtn"
-              type="text"
-              value="REGISTER"
-              onclick="location.assign('loginpage.html')"
-              >Login here
-            </a>
-            </div>
           </div>
         </form>
       </div>
+      <div> Already have an account?
+            <a
+              id="loginbtn"
+              onclick="location.assign('./loginpage.html')"
+              >Login here
+            </a>
+            </div>
     </div>
 
     <div id="triangle"></div>
 
-    <script src="register.js"></script>
+    <script src="../javascripts/register.js"></script>
 
     <div id="add-update-msg">
       <div class="alert alert-failure" role="alert">
