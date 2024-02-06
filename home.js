@@ -9,7 +9,6 @@ subsearch.addEventListener('keypress', submitSearchReturn);
 
 function submitSearchReturn(e) {
   if (e.key === 'Enter') {
-    showLoadingAnimation();
     searchQuiz();
   }
 }
@@ -42,6 +41,7 @@ async function getQuizObjects() {
     .then(response => {
       console.log(response);
       initQuizArray(response);
+      displayQuizObjects(jsonQuizArray.quizDetails);
     })
     .catch(error => { console.error('Error get request failed:', error); });
 
@@ -92,14 +92,13 @@ function displayQuizObjects(jsonObject) {
       newQuizImg.src = jsonObject[i].quizimglink;
 
       // responsive css circular portrait for wide/tall images
-      console.log(newQuizImg.height, newQuizImg.width)
       if (newQuizImg.height > newQuizImg.width) {
         newQuizImgDiv.classList.add("centeredvert");
       } else {
         newQuizImgDiv.classList.add("centeredhori")
       }
     }
-    else {  
+    else {
       // ideally will use default img
     }
 
@@ -142,4 +141,3 @@ function searchQuiz() {
   document.getElementById("content").innerHTML = "";
   displayQuizObjects(tempJson.array)
 }
-
