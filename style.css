@@ -301,7 +301,7 @@ input[type="password"] {
 
 #add-update-msg {
     display: none;
-    color: rgb(239, 182, 182);
+    color: rgb(162, 25, 25);
     margin-top: 10px;
     text-align: center;
 }
@@ -821,4 +821,3 @@ section .option_list .option .icon {
     background-color: #15314B;
     transform: scale(1.05);
 }
-
