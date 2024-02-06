@@ -301,7 +301,7 @@ input[type="password"] {
 
 #add-update-msg {
     display: none;
-    color: rgb(239, 182, 182);
+    color: rgb(162, 25, 25);
     margin-top: 10px;
     text-align: center;
 }
@@ -794,4 +794,3 @@ footer .total_que span p:first-child {
     background-color: #C6D1D8;
     transform: scale(1.05);
 }
-
