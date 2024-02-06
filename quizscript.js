@@ -1,5 +1,4 @@
 //selecting all required elements
-const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
 const continue_btn = info_box.querySelector(".buttons .restart");
@@ -14,11 +13,7 @@ const timeCount = document.querySelector(".timer .timer_sec");
 // Hiding the timer initially
 timer_feature.style.display = "none";
 
-
-// if startQuiz button clicked
-start_btn.onclick = ()=>{
-    info_box.classList.add("activeInfo"); //show info box
-}
+info_box.classList.add("activeInfo");
 
 // if exitQuiz button clicked
 exit_btn.onclick = ()=>{

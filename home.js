@@ -14,13 +14,9 @@ function submitSearchReturn(e) {
   }
 }
 
-async function SetupHome() {
-  showLoadingAnimation();
+function SetupHome() {
   document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
-  await getQuizObjects().then(() => {
-    hideLoadingAnimation();
-  });
-  displayQuizObjects(jsonQuizArray.quizDetails);
+  getQuizObjects();
 }
 
 const jsonQuizArray = { quizDetails: [] };
@@ -28,7 +24,7 @@ const jsonQuizArray = { quizDetails: [] };
 // grab quiz details from api and then create a quiz object per quiz grabbed and add to quizArray
 async function getQuizObjects() {
 
-  const APIKEY = "65c099ce00d3da1e0863a2dd";
+  const APIKEY = "6593f49e3ea4be628deb6cfa";
 
   let settings = {
     method: 'GET',
@@ -41,7 +37,7 @@ async function getQuizObjects() {
 
   // fetch data and check if password valid
   // fetch from quiz and create quiz object based on api info
-  await fetch(`https://firestoredb-a218.restdb.io/rest/quiz`, settings)
+  await fetch(`https://mydatabase-c3eb.restdb.io/rest/quiz`, settings)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -123,14 +119,6 @@ function displayQuizObjects(jsonObject) {
     Content.appendChild(newQuizDiv);
 
   }
-}
-
-function showLoadingAnimation() {
-  document.getElementById("loading-animation").style.display = "block";
-}
-
-function hideLoadingAnimation() {
-  document.getElementById("loading-animation").style.display = "none";
 }
 
 // search function to... search what did u expect?

@@ -381,7 +381,7 @@ body {
 }
 
 .info_box {
-    width: 540px;
+    width: 640px;
     background: #fff;
     border-radius: 5px;
     transform: translate(-50%, -50%) scale(0.9);
@@ -416,19 +416,22 @@ body {
     color: #475F76;
 }
 
-.info_box .buttons {
-    height: 60px;
+.buttons {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 0 30px;
-    border-top: 1px solid lightgrey;
 }
 
-.info_box .buttons button {
-    margin: 0 5px;
-    height: 40px;
-    width: 100px;
+.buttons button {
+    margin: 10px;
+    height: 60px;
+    width: 290px;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -709,11 +712,12 @@ footer .total_que span p:first-child {
 }
 
 .buttons button.restart {
-    color: #fff;
-    background: #475F76;
+    color: #475F76;
+    background: #fff;
 }
 
 .buttons button.restart:hover {
+    color: #fff;
     background: #0263ca;
 }
 
@@ -724,7 +728,7 @@ footer .total_que span p:first-child {
 
 .buttons button.quit:hover {
     color: #fff;
-    background: #475F76;
+    background: #0263ca;
 }
 
 #leaderboard-title {
