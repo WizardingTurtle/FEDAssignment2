@@ -1,6 +1,7 @@
 // code for homepage.html
 // idea grab user info from session storage and display it
 // api request to grab data for quizes to create objects
+const APIKEY = "6593f49e3ea4be628deb6cfa";
 
 document.addEventListener("DOMContentLoaded", SetupHome);
 
@@ -15,15 +16,14 @@ function submitSearchReturn(e) {
 
 function SetupHome() {
   document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
+  getUserRanking();
   getQuizObjects();
 }
 
-const jsonQuizArray = { quizDetails: [] };
+const jsonQuizArray = [];
 
 // grab quiz details from api and then create a quiz object per quiz grabbed and add to quizArray
 async function getQuizObjects() {
-
-  const APIKEY = "6593f49e3ea4be628deb6cfa";
 
   let settings = {
     method: 'GET',
@@ -41,11 +41,9 @@ async function getQuizObjects() {
     .then(response => {
       console.log(response);
       initQuizArray(response);
-      displayQuizObjects(jsonQuizArray.quizDetails);
+      displayQuizObjects(jsonQuizArray);
     })
     .catch(error => { console.error('Error get request failed:', error); });
-
-
 }
 
 // put quiz data from json object into jsonquizArray.quizDetails
@@ -55,12 +53,12 @@ function initQuizArray(apiObject) {
 
   for (let i = 0; i < quizCount; i++) {
 
-    var quizExists = jsonQuizArray.quizDetails.filter(obj => {
+    var quizExists = jsonQuizArray.filter(obj => {
       return obj.quizid == apiObject[i].quizid
     })
 
     if (quizExists == false) {
-      jsonQuizArray.quizDetails.push({
+      jsonQuizArray.push({
         "quizid": apiObject[i].quizid,
         "quizimglink": apiObject[i].quizimglink,
         "quizname": apiObject[i].quizname,
@@ -92,13 +90,14 @@ function displayQuizObjects(jsonObject) {
       newQuizImg.src = jsonObject[i].quizimglink;
 
       // responsive css circular portrait for wide/tall images
+      console.log(newQuizImg.height, newQuizImg.width)
       if (newQuizImg.height > newQuizImg.width) {
         newQuizImgDiv.classList.add("centeredvert");
       } else {
         newQuizImgDiv.classList.add("centeredhori")
       }
     }
-    else {
+    else {  
       // ideally will use default img
     }
 
@@ -140,4 +139,45 @@ function searchQuiz() {
   }
   document.getElementById("content").innerHTML = "";
   displayQuizObjects(tempJson.array)
+}
+
+async function getUserRanking(){
+  let settings = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      "x-apikey": APIKEY,
+      "Cache-Control": "no-cache"
+    },
+  }
+
+  if (localStorage.getItem("username") === null) {
+    document.getElementById("user-points").innerText = '0'
+    document.getElementById("user-rank").innerText = calculateRank(0)
+  } else {
+
+    await fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${Username}"}`, settings)
+    .then(response => response.json())
+    .then(response => {
+      console.log("Leaderboard data for user "+ response);
+      var size = Object.keys(response).length
+      if (size > 0) {
+        document.getElementById("user-points").innerText = response.points;
+        document.getElementById("user-rank").innerText = calculateRank(response.points)
+      }
+    })
+    .catch(error => { console.error('Error get request failed:', error); });
+  }
+}
+
+function calculateRank(points) {
+  let rank = 'noobie'
+  if (points <= 10) {
+    rank = 'Squire'
+  } else if (points <= 20) {
+    rank = 'Knight'
+  } else if (points <= 50) {
+    rank = 'Captain'
+  }
+  return rank;
 }
