@@ -25,13 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initial data for the "All" tab
     updateLeaderboard(apiUrl);
-
+    
+    /*
     allTimeTab.addEventListener("click", function () {
         updateLeaderboard(apiUrl);
         setActiveTab(allTimeTab);
     });
 
-    /*
+    
     monthlyTab.addEventListener("click", function () {
         updateLeaderboard(apiUrl + '/month');
         setActiveTab(monthlyTab);
@@ -49,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             // Sort the data array from highest to lowest score
-            data.sort((a, b) => b.score - a.score);
 
             // Clear existing leaderboard list
             leaderboardList.innerHTML = "";
@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("second-place-score").innerText = data[1].score;
             document.getElementById("second-place-username").innerText = data[1].username;
 
-            document.getElementById("third-place-score").innerText = data[1].score;
-            document.getElementById("third-place-username").innerText = data[1].username;
+            document.getElementById("third-place-score").innerText = data[2].score;
+            document.getElementById("third-place-username").innerText = data[2].username;
 
             // Display the top 20 names based on the selected tab
             for (let i = 3; i < Math.min(data.length, 20); i++) {
@@ -73,10 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 leaderboardItem.className = "leaderboard-item";
 
                 // Use nth-child() to apply color based on ranking
-                leaderboardItem.style.backgroundColor = getRankingColor(i + 1);
+                // leaderboardItem.style.backgroundColor = getRankingColor(i + 1);
 
                 leaderboardItem.innerHTML = `
-                    <div>${getRankText(i + 1)}</div>
+                    <div>${i+1}.</div>
+                    <div>${item.username}</div>
                     <div>${item.score} points</div>
                 `;
                 leaderboardList.appendChild(leaderboardItem);
@@ -125,7 +126,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }   
     */
+
+
+// Update the updateLeaderboard function to handle updating the leaderboard with user data
+
 });
+
+
+function goToHomePage() {
+    window.location.assign("homepage.html");
+}
 
 
 
