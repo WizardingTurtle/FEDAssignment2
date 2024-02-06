@@ -30,12 +30,12 @@ function validateAccount(DBpassword, Password) {
   if (DBpassword == Password) {
     // store user credentials in session storage to make pulling info easier
     sessionStorage.setItem('Username', document.getElementById("username").value);
-    sessionStorage.setItem('Password', document.getElementById("password").value);
     window.location.assign("./homepage.html")
     //ideally will remember login credentials throughout the website
   }
   else {
-    document.getElementById("add-update-msg").style.display = "inline";
+    document.getElementById("add-update-msg").innerText = "LOGIN FAILED: Incorrect Password";
+        document.getElementById("add-update-msg").style.display = "inline";
   }
 }
 
@@ -77,7 +77,7 @@ function verifyLogin() {
         validateAccount(response[0].password, Password);
       }
       else {
-        document.getElementById("add-update-msg").innerText = "Account does not exist";
+        document.getElementById("add-update-msg").innerText = "LOGIN FAILED: Account does not exist";
         document.getElementById("add-update-msg").style.display = "inline";
       }
     })
