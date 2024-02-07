@@ -16,11 +16,29 @@ function submitFormReturn(event) {
 // Initialize page function
 function setupLogin() {
   hideMe();
+  const loginButton = document.getElementById("loginbtn");
+  loginButton.addEventListener("click", showAnimation);
 }
 
 // hide alerts function
 function hideMe() {
   document.getElementById("add-update-msg").style.display = "none";
+  document.getElementById("lottie-loading-home").innerHTML = "";
+}
+
+// show animation function
+function showAnimation() {
+  document.getElementById("lottie-loading-home").innerHTML = `
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <lottie-player 
+        src="https://lottie.host/39027a3c-0413-4086-9fa5-687aed7344b8/U4LWfxonGw.json"  
+        speed="1" 
+        style="width: 10vw; min-height: 10vh" 
+        loop
+        autoplay 
+        direction="1" 
+        mode="normal">
+    </lottie-player>`;
 }
 
 
