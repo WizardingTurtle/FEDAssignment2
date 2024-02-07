@@ -2,7 +2,6 @@
 const APIKEY = "6593f49e3ea4be628deb6cfa";
 // QuizArray
 var questions = [];
-// update image css every 2 seconds
 
 
 //select the needed elements
@@ -206,6 +205,7 @@ function showResult() {
         let scoreTag = '<span><p>' + userScore + '</p> / <p>' + questions.length + ', Try Again Next Time!</p></span>';
         scoreText.innerHTML = scoreTag;
     }
+    updateQuizScore();
 }
 
 function startTimer(time) {
@@ -292,6 +292,7 @@ async function initializeQuizData() {
             questions = response[0].quizquestions;
             console.log(questions)
             document.getElementById("placeholder-title").innerText = sessionStorage.getItem("quizName");
+            document.getElementById("lottie-loading").style.display = "none";
         })
         .catch(error => {
             // Handle errors here
@@ -310,7 +311,11 @@ function updateQuizScore() {
     } else {
         var quizid = sessionStorage.getItem("quizID");
         var username = sessionStorage.getItem("Username");
+        console.log(quizid + typeof (quizid));
+        console.log(username + typeof (username));
     }
+    document.getElementById("loading-text").innerText = "Posting Score to RESTDB";
+    document.getElementById("lottie-loading").style.display = "inline";
 
     let settings = {
         method: 'GET',
@@ -321,15 +326,17 @@ function updateQuizScore() {
         },
     }
 
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"quizid":"${quizid}", "username":${username}}`, settings)
+    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"quizid":"${quizid}","username":"${username}"}`, settings)
         .then(response => response.json())
         .then(response => {
             console.log(response)
             var size = Object.keys(response).length
-            var fieldid = response[0]._id
             // if it exists - update score
             // else post new data
             if (size > 0) {
+                var fieldid = response[0]._id
+                console.log(response[0]._id);
+
                 let jsondata = {
                     "score": userScore
                 }
@@ -344,7 +351,8 @@ function updateQuizScore() {
                     body: JSON.stringify(jsondata),
                 }
 
-                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores/"${fieldid}"`, settings)
+                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores/${fieldid}`, settings)
+                    .then(updateLeaderboard())
                     .catch(error => {
                         // Handle errors here
                         console.error('Error fetching Patch quizscores data:', error);
@@ -367,6 +375,7 @@ function updateQuizScore() {
                 }
 
                 fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores`, settings)
+                    .then(updateLeaderboard())
                     .catch(error => {
                         // Handle errors here
                         console.error('Error fetching Post quizscores data:', error);
@@ -384,10 +393,10 @@ function updateLeaderboard() {
         console.log("updateLeaderboard cancelled - session has either no quiz id or username")
         return;
     } else {
-        var quizid = sessionStorage.getItem("quizID");
         var username = sessionStorage.getItem("Username");
     }
     var leaderboardScore = 0;
+    document.getElementById("loading-text").innerText = "Updating Leaderboard please don't close the window";
 
     let settings = {
         method: 'GET',
@@ -421,8 +430,8 @@ function updateLeaderboard() {
                     .then(response => response.json())
                     .then(response => {
                         var size = response.length
-                        var fieldid = response[0]._id
                         if (size > 0) {
+                            var fieldid = response[0]._id
                             let jsondata = {
                                 "score": leaderboardScore
                             }
@@ -437,7 +446,8 @@ function updateLeaderboard() {
                                 body: JSON.stringify(jsondata),
                             }
 
-                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards/"${fieldid}"`, settings)
+                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards/${fieldid}`, settings)
+                                .then(document.getElementById("lottie-loading").style.display = "none")
                         } else {
                             let jsondata = {
                                 "score": leaderboardScore,
@@ -455,6 +465,7 @@ function updateLeaderboard() {
                             }
 
                             fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards`, settings)
+                                .then(document.getElementById("lottie-loading").style.display = "none")
                                 .catch(error => {
                                     // Handle errors here
                                     console.error('Error fetching Post quizscores data:', error);

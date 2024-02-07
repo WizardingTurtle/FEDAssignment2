@@ -24,9 +24,6 @@ function SetupHome() {
     displayQuizObjects(jsonQuizArray);
   }
   getQuizObjects();
-  console.log(sessionStorage.getItem("imagesUpdated"))
-  console.log(sessionStorage.getItem("imagesUpdated") == "false");
-
   setInterval(updateQuizImages, 4000);
 
 }
@@ -52,6 +49,7 @@ async function getQuizObjects() {
     .then(response => {
       console.log(response);
       initQuizArray(response);
+      document.getElementById("lottie-loading").innerHTML = "";
       displayQuizObjects(jsonQuizArray);
     })
     .catch(error => { console.error('Error get request failed:', error); });
@@ -177,7 +175,8 @@ function searchQuiz() {
   displayQuizObjects(tempArray)
 }
 
-async function getUserRanking() {
+function getUserRanking() {
+  console.log("getting user rank");
   let settings = {
     method: 'GET',
     headers: {
@@ -187,19 +186,21 @@ async function getUserRanking() {
     },
   }
 
-  if (localStorage.getItem("username") === null) {
+  console.log(sessionStorage.getItem("Username") === null);
+  if (sessionStorage.getItem("Username") === null) {
     document.getElementById("user-points").innerText = '0'
     document.getElementById("user-rank").innerText = calculateRank(0)
   } else {
+    var username = sessionStorage.getItem("Username");
 
-    await fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${Username}"}`, settings)
+    fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
       .then(response => response.json())
       .then(response => {
         console.log("Leaderboard data for user " + response);
-        var size = Object.keys(response).length
+        var size = Object.keys(response[0]).length
         if (size > 0) {
-          document.getElementById("user-points").innerText = response.points;
-          document.getElementById("user-rank").innerText = calculateRank(response.points)
+          document.getElementById("user-points").innerText = response[0].score;
+          document.getElementById("user-rank").innerText = calculateRank(response[0].score)
         }
       })
       .catch(error => { console.error('Error get request failed:', error); });
