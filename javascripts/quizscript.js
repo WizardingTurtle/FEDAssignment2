@@ -118,8 +118,8 @@ function showQuestions(index){
 }
 
 // the icons for correct and wrong options
-let tickIconTag = '<div class="icon tick"><img src="checked.png" alt="User Icon" id="user-icon"></div>';
-let crossIconTag = '<div class="icon cross"><img src="cancel.png" alt="User Icon" id="user-icon"></div>';
+let tickIconTag = '<div class="icon tick"><img src="../images/checked.png" alt="User Icon" id="user-icon"></div>';
+let crossIconTag = '<div class="icon cross"><img src="../images/cancel.png" alt="User Icon" id="user-icon"></div>';
 
 //if user clicks an option
 function optionSelected(answer){
@@ -232,3 +232,82 @@ function resetProgressBar() {
 function quitQuiz() {
     window.location.href = "homepage.html";
 }
+
+//for restdb, implementing features; change here first then copy paste to the top
+async function initializeQuizData() {
+    try {
+        fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Username}"}`, settings/*change this*/)
+        .then(response => response.json())
+        .then(response => {
+        questions = data.questions; // Assuming data is structured with a 'questions' key containing an array of question objects
+    })
+    } catch (error) {
+        console.error('Error fetching quiz data:', error);
+    }
+}
+
+// Function to randomize quiz options
+function randomizeOptions(options) {
+    return options.sort(() => Math.random() - 0.5);
+}
+
+// Function to handle posting or updating quiz score to the database
+async function handleQuizScore(username, score) {
+    try {
+        const response = await fetch('your-rest-api-url/scores', {
+            method: 'POST', // Assuming you use POST to add new scores
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, score })
+        });
+        const data = await response.json();
+        console.log('Quiz score posted:', data);
+    } catch (error) {
+        console.error('Error posting quiz score:', error);
+    }
+}
+
+// Function to calculate the total scores of a user from all quizzes
+async function calculateTotalScores(username) {
+    try {
+        const response = await fetch(`your-rest-api-url/scores?username=${username}`);
+        const data = await response.json();
+        const totalScore = data.reduce((acc, cur) => acc + cur.score, 0);
+        console.log(`Total score for ${username}:`, totalScore);
+        // Update leaderboard data here
+    } catch (error) {
+        console.error('Error calculating total scores:', error);
+    }
+}
+
+// Call initializeQuizData to fetch quiz questions from the API
+initializeQuizData();
+
+// Inside showQuestions function, after getting options from questions[index], randomize them before displaying
+function showQuestions(index){
+    // add the previous code here
+
+    // Randomize options
+    const randomizedOptions = randomizeOptions(questions[index].options);
+
+    let option_tag = '<div class="option"><span>'+ randomizedOptions[0] +'</span></div>'
+    + '<div class="option"><span>'+ randomizedOptions[1] +'</span></div>'
+    + '<div class="option"><span>'+ randomizedOptions[2] +'</span></div>'
+    + '<div class="option"><span>'+ randomizedOptions[3] +'</span></div>';
+
+    // add the remaining code here (basically copypaste into the code on top)
+}
+
+// Inside optionSelected function, after checking the correct answer, call handleQuizScore to post/update the score
+function optionSelected(answer){
+    // existing code
+
+    // Call handleQuizScore
+    handleQuizScore('username', userScore);
+
+    // existing code
+}
+
+// At the end of quiz or when needed, call calculateTotalScores to get total scores of a user
+calculateTotalScores('username');
