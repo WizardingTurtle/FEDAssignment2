@@ -2,10 +2,6 @@
 // idea grab user info from session storage and display it
 // api request to grab data for quizes to create objects
 const APIKEY = "6593f49e3ea4be628deb6cfa";
-if (sessionStorage.getItem("imagesUpdated") === null) {
-  sessionStorage.setItem("imagesUpdated", false);
-}
-
 document.addEventListener("DOMContentLoaded", SetupHome);
 
 const subsearch = document.getElementById("search-bar-input");
@@ -21,18 +17,18 @@ function SetupHome() {
   if (sessionStorage.getItem('Username') !== null) {
     document.getElementById("usernameHome").innerHTML = sessionStorage.getItem('Username');
   }
-  
+
   getUserRanking();
   console.log("jsonquiz array has items " + (jsonQuizArray !== null));
   if (jsonQuizArray !== null) {
     displayQuizObjects(jsonQuizArray);
-  } 
+  }
   getQuizObjects();
   console.log(sessionStorage.getItem("imagesUpdated"))
   console.log(sessionStorage.getItem("imagesUpdated") == "false");
-  if (sessionStorage.getItem("imagesUpdated") == "false") {
-    setTimeout(updateQuizImages, 4000);
-  }
+
+  setInterval(updateQuizImages, 4000);
+
 }
 
 const jsonQuizArray = [];
@@ -88,7 +84,7 @@ function updateQuizImages() {
   console.log("Update image executed")
   let quizCount = jsonQuizArray.length;
   for (let i = 0; i < quizCount; i++) {
-    let imgid = "img-id-"+ i
+    let imgid = "img-id-" + i
     console.log(imgid);
     let image = document.getElementById(imgid);
     if ((image.naturalHeight > image.naturalWidth && image.parentElement.classList.contains("centeredhori"))) {
@@ -97,7 +93,6 @@ function updateQuizImages() {
       image.parentElement.classList.add("centeredvert");
     }
   }
-  sessionStorage.setItem("imagesUpdated", true);
 }
 
 // it will create and dispay quizzes in the homepage
@@ -111,15 +106,18 @@ function displayQuizObjects(jsonObject) {
     // create elements + add classes
     var newQuizDiv = document.createElement("div");
     newQuizDiv.classList.add("quiz-box");
-    newQuizDiv.onclick = function() { 
+    // clicking on quiz object will send user to quiz page storing quizid
+    newQuizDiv.onclick = function () {
       sessionStorage.setItem("quizID", jsonObject[i].quizid);
-      window.location.assign("../HTML/quizpage.html")}
+      sessionStorage.setItem("quizName", jsonObject[i].quizname);
+      window.location.assign("../HTML/quizpage.html")
+    }
 
     var newQuizImgDiv = document.createElement("div");
     newQuizImgDiv.classList.add("quiz-box-div");
 
     var newQuizImg = document.createElement("img");
-    newQuizImg.setAttribute("id","img-id-" + i);
+    newQuizImg.setAttribute("id", "img-id-" + i);
     console.log(jsonObject[i].quizimglink);
 
     if (jsonObject[i].quizimglink != null) {
@@ -132,7 +130,7 @@ function displayQuizObjects(jsonObject) {
         newQuizImgDiv.classList.add("centeredhori")
       }
     }
-    else {  
+    else {
       // ideally will use default img
     }
 
@@ -179,7 +177,7 @@ function searchQuiz() {
   displayQuizObjects(tempArray)
 }
 
-async function getUserRanking(){
+async function getUserRanking() {
   let settings = {
     method: 'GET',
     headers: {
@@ -195,16 +193,16 @@ async function getUserRanking(){
   } else {
 
     await fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${Username}"}`, settings)
-    .then(response => response.json())
-    .then(response => {
-      console.log("Leaderboard data for user "+ response);
-      var size = Object.keys(response).length
-      if (size > 0) {
-        document.getElementById("user-points").innerText = response.points;
-        document.getElementById("user-rank").innerText = calculateRank(response.points)
-      }
-    })
-    .catch(error => { console.error('Error get request failed:', error); });
+      .then(response => response.json())
+      .then(response => {
+        console.log("Leaderboard data for user " + response);
+        var size = Object.keys(response).length
+        if (size > 0) {
+          document.getElementById("user-points").innerText = response.points;
+          document.getElementById("user-rank").innerText = calculateRank(response.points)
+        }
+      })
+      .catch(error => { console.error('Error get request failed:', error); });
   }
 }
 

@@ -1,3 +1,10 @@
+//API Key
+const APIKEY = "6593f49e3ea4be628deb6cfa";
+// QuizArray
+var questions = [];
+// update image css every 2 seconds
+
+
 //select the needed elements
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
@@ -17,21 +24,22 @@ progressBar.style.display = "none";
 info_box.classList.add("activeInfo");
 
 // if exit button clicked
-exit_btn.onclick = ()=>{
+exit_btn.onclick = () => {
     window.location.href = "homepage.html";
 }
 
 // if continue button clicked
-continue_btn.onclick = ()=>{
+continue_btn.onclick = () => {
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
-    showQuestions(0); 
-    questionCounter(1); 
-    startTimer(19); 
-    startTimerLine(0); 
+    showQuestions(0);
+    questionCounter(1);
+    startTimer(19);
+    startTimerLine(0);
+    setInterval(updateQuizImage(), 2000);
 }
 
-let timeValue =  20;
+let timeValue = 20;
 let que_count = 0;
 let que_numb = 1;
 let userScore = 0;
@@ -43,21 +51,22 @@ const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if restart button clicked
-restart_quiz.onclick = ()=>{
-    quiz_box.classList.add("activeQuiz"); 
-    result_box.classList.remove("activeResult"); 
-    timeValue = 20; 
+restart_quiz.onclick = () => {
+    quiz_box.classList.add("activeQuiz");
+    result_box.classList.remove("activeResult");
+    timeValue = 20;
     que_count = 0;
     que_numb = 1;
     userScore = 0;
     widthValue = 0;
-    showQuestions(que_count); 
-    questionCounter(que_numb); 
+    showQuestions(que_count);
+    questionCounter(que_numb);
     clearInterval(counter);
-    clearInterval(counterLine); 
-    startTimer(timeValue); 
-    startTimerLine(widthValue); 
-    next_btn.classList.remove("show"); 
+    clearInterval(counterLine);
+    startTimer(timeValue);
+    startTimerLine(widthValue);
+    next_btn.classList.remove("show");
+    setInterval(updateQuizImage(), 2000);
 
     // Reset progress bar
     resetProgressBar();
@@ -72,47 +81,71 @@ const next_btn = document.querySelector(".quiznext .next_btn");
 const total_question_counter = document.querySelector(".total_que");
 
 // if next button clicked
-next_btn.onclick = ()=>{
-    if(que_count < questions.length - 1){ 
-        que_count++; 
-        que_numb++; 
-        showQuestions(que_count); 
-        questionCounter(que_numb); 
-        clearInterval(counter); 
-        clearInterval(counterLine); 
-        startTimer(timeValue); 
-        startTimerLine(widthValue); 
+next_btn.onclick = () => {
+    if (que_count < questions.length - 1) {
+        que_count++;
+        que_numb++;
+        showQuestions(que_count);
+        questionCounter(que_numb);
+        clearInterval(counter);
+        clearInterval(counterLine);
+        startTimer(timeValue);
+        startTimerLine(widthValue);
         // Update the progress bar
         updateProgressBar();
         next_btn.classList.remove("show");
-    }else{
-        clearInterval(counter); 
-        clearInterval(counterLine); 
-        showResult(); 
+        setInterval(updateQuizImage(), 2000);
+    } else {
+        clearInterval(counter);
+        clearInterval(counterLine);
+        showResult();
         updateProgressBar();
     }
 }
 
+// Function to randomize quiz options
+function randomizeOptions(options) {
+    return options.sort(() => Math.random() - 0.5);
+}
+
+// Function updates image
+function updateQuizImage() {
+    console.log("Update image executed")
+    let image = document.getElementById("qnImg");
+    console.log(image.src)
+    if ((image.naturalHeight > image.naturalWidth && image.parentElement.classList.contains("centeredhori"))) {
+        console.log("update ran for img ")
+        image.parentElement.classList.remove("centeredhori");
+        image.parentElement.classList.add("centeredvert");
+    }
+}
+
 // getting questions and options from array
-function showQuestions(index){
+function showQuestions(index) {
     const que_text = document.querySelector(".que_text");
 
     //creating a new span and div tag for question and option and passing the value using array index
-    let que_tag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
-    let option_tag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[2] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
+    let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
+
+    const randomizedOptions = randomizeOptions(questions[index].options);
+
+    let option_tag = '<div class="option"><span>' + randomizedOptions[0] + '</span></div>'
+        + '<div class="option"><span>' + randomizedOptions[1] + '</span></div>'
+        + '<div class="option"><span>' + randomizedOptions[2] + '</span></div>'
+        + '<div class="option"><span>' + randomizedOptions[3] + '</span></div>';
+
+
     que_text.innerHTML = que_tag; //adding new span tag inside que_tag
     option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-   
+    document.getElementById("qnImg").src = `${questions[index].imglink}`;
+
     //show timer and progress bar
     timeCount.style.display = "flex";
     progressBar.style.display = "flex";
-    
+
     const option = option_list.querySelectorAll(".option");
 
-    for(i=0; i < option.length; i++){
+    for (i = 0; i < option.length; i++) {
         option[i].setAttribute("onclick", "optionSelected(this)");
     }
 }
@@ -122,55 +155,55 @@ let tickIconTag = '<div class="icon tick"><img src="../images/checked.png" alt="
 let crossIconTag = '<div class="icon cross"><img src="../images/cancel.png" alt="User Icon" id="user-icon"></div>';
 
 //if user clicks an option
-function optionSelected(answer){
-    clearInterval(counter); 
-    clearInterval(counterLine); 
+function optionSelected(answer) {
+    clearInterval(counter);
+    clearInterval(counterLine);
     let userAns = answer.textContent;
-    let correcAns = questions[que_count].answer; 
+    let correcAns = questions[que_count].answer;
     const allOptions = option_list.children.length;
-    
-    if(userAns == correcAns){ 
-        userScore += 1; 
-        answer.classList.add("correct"); 
-        answer.insertAdjacentHTML("beforeend", tickIconTag); 
+
+    if (userAns == correcAns) {
+        userScore += 1;
+        answer.classList.add("correct");
+        answer.insertAdjacentHTML("beforeend", tickIconTag);
         console.log("Correct Answer");
         console.log("Your correct answers = " + userScore);
-    }else{
-        answer.classList.add("incorrect"); 
-        answer.insertAdjacentHTML("beforeend", crossIconTag); 
+    } else {
+        answer.classList.add("incorrect");
+        answer.insertAdjacentHTML("beforeend", crossIconTag);
         console.log("Wrong Answer");
 
-        for(i=0; i < allOptions; i++){
-            if(option_list.children[i].textContent == correcAns){ 
-                option_list.children[i].setAttribute("class", "option correct"); 
+        for (i = 0; i < allOptions; i++) {
+            if (option_list.children[i].textContent == correcAns) {
+                option_list.children[i].setAttribute("class", "option correct");
                 option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag);
                 console.log("Auto selected correct answer.");
             }
         }
     }
-    for(i=0; i < allOptions; i++){
-        option_list.children[i].classList.add("disabled"); 
+    for (i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.add("disabled");
     }
-    next_btn.classList.add("show"); 
+    next_btn.classList.add("show");
 }
 
-function showResult(){
-    info_box.classList.remove("activeInfo"); 
-    quiz_box.classList.remove("activeQuiz"); 
-    result_box.classList.add("activeResult"); 
+function showResult() {
+    info_box.classList.remove("activeInfo");
+    quiz_box.classList.remove("activeQuiz");
+    result_box.classList.add("activeResult");
     timeCount.style.display = "none";
     const scoreText = result_box.querySelector(".score_text");
-    if (userScore > 3){ // if user scores more than 3 points
-        
-        let scoreTag = '<span><p>'+ userScore +'</p> / <p>'+ questions.length +'</p>, Well Done!</span>';
-        scoreText.innerHTML = scoreTag;  
-    }
-    else if(userScore > 1){ // if user scores more than 1 point
-        let scoreTag = '<span><p>'+ userScore +'</p> / <p>'+ questions.length +'</p>, Try Again Next Time!</span>';
+    if (userScore > 3) { // if user scores more than 3 points
+
+        let scoreTag = '<span><p>' + userScore + '</p> / <p>' + questions.length + '</p>, Well Done!</span>';
         scoreText.innerHTML = scoreTag;
     }
-    else{ // if user scores 0 points
-        let scoreTag = '<span><p>'+ userScore +'</p> / <p>'+ questions.length +', Try Again Next Time!</p></span>';
+    else if (userScore > 1) { // if user scores more than 1 point
+        let scoreTag = '<span><p>' + userScore + '</p> / <p>' + questions.length + '</p>, Try Again Next Time!</span>';
+        scoreText.innerHTML = scoreTag;
+    }
+    else { // if user scores 0 points
+        let scoreTag = '<span><p>' + userScore + '</p> / <p>' + questions.length + ', Try Again Next Time!</p></span>';
         scoreText.innerHTML = scoreTag;
     }
 }
@@ -178,8 +211,8 @@ function showResult(){
 function startTimer(time) {
     counter = setInterval(timer, 1000);
     function timer() {
-        timeCount.textContent = time; 
-        time--; 
+        timeCount.textContent = time;
+        time--;
         if (time < 9) {
             let addZero = timeCount.textContent;
             timeCount.textContent = "0" + addZero;
@@ -214,9 +247,9 @@ function startTimerLine(time) {
     }
 }
 
-function questionCounter(index){
-    let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
-    total_question_counter.innerHTML = totalQueCounTag; 
+function questionCounter(index) {
+    let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
+    total_question_counter.innerHTML = totalQueCounTag;
 }
 
 function updateProgressBar() {
@@ -235,79 +268,199 @@ function quitQuiz() {
 
 //for restdb, implementing features; change here first then copy paste to the top
 async function initializeQuizData() {
-    try {
-        fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Username}"}`, settings/*change this*/)
+    if (sessionStorage.getItem("quizID") === null) {
+        // return user to homepage after 2-3 seco nds since quiz does not exist
+    } else {
+        var quizid = sessionStorage.getItem("quizID");
+    }
+    console.log(quizid);
+    // init get fetch request for quiz
+
+    let settings = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "x-apikey": APIKEY,
+            "Cache-Control": "no-cache"
+        },
+    }
+
+    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizquestions?q={"quizid":"${quizid}"}`, settings)
         .then(response => response.json())
         .then(response => {
-        questions = data.questions; // Assuming data is structured with a 'questions' key containing an array of question objects
-    })
-    } catch (error) {
-        console.error('Error fetching quiz data:', error);
-    }
-}
-
-// Function to randomize quiz options
-function randomizeOptions(options) {
-    return options.sort(() => Math.random() - 0.5);
-}
-
-// Function to handle posting or updating quiz score to the database
-async function handleQuizScore(username, score) {
-    try {
-        const response = await fetch('your-rest-api-url/scores', {
-            method: 'POST', // Assuming you use POST to add new scores
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, score })
+            console.log(response)
+            questions = response[0].quizquestions;
+            console.log(questions)
+            document.getElementById("placeholder-title").innerText = sessionStorage.getItem("quizName");
+        })
+        .catch(error => {
+            // Handle errors here
+            console.error('Error fetching quiz data:', error);
         });
-        const data = await response.json();
-        console.log('Quiz score posted:', data);
-    } catch (error) {
-        console.error('Error posting quiz score:', error);
-    }
-}
-
-// Function to calculate the total scores of a user from all quizzes
-async function calculateTotalScores(username) {
-    try {
-        const response = await fetch(`your-rest-api-url/scores?username=${username}`);
-        const data = await response.json();
-        const totalScore = data.reduce((acc, cur) => acc + cur.score, 0);
-        console.log(`Total score for ${username}:`, totalScore);
-        // Update leaderboard data here
-    } catch (error) {
-        console.error('Error calculating total scores:', error);
-    }
 }
 
 // Call initializeQuizData to fetch quiz questions from the API
 initializeQuizData();
 
-// Inside showQuestions function, after getting options from questions[index], randomize them before displaying
-function showQuestions(index){
-    // add the previous code here
+// Function to post score to DB
+function updateQuizScore() {
+    if (sessionStorage.getItem("Username") === null || sessionStorage.getItem("quizID") === null) {
+        console.log("updateQuizScore cancelled - session has either no quiz id or username")
+        return;
+    } else {
+        var quizid = sessionStorage.getItem("quizID");
+        var username = sessionStorage.getItem("Username");
+    }
 
-    // Randomize options
-    const randomizedOptions = randomizeOptions(questions[index].options);
+    let settings = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "x-apikey": APIKEY,
+            "Cache-Control": "no-cache"
+        },
+    }
 
-    let option_tag = '<div class="option"><span>'+ randomizedOptions[0] +'</span></div>'
-    + '<div class="option"><span>'+ randomizedOptions[1] +'</span></div>'
-    + '<div class="option"><span>'+ randomizedOptions[2] +'</span></div>'
-    + '<div class="option"><span>'+ randomizedOptions[3] +'</span></div>';
+    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"quizid":"${quizid}", "username":${username}}`, settings)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            var size = Object.keys(response).length
+            var fieldid = response[0]._id
+            // if it exists - update score
+            // else post new data
+            if (size > 0) {
+                let jsondata = {
+                    "score": userScore
+                }
 
-    // add the remaining code here (basically copypaste into the code on top)
+                let settings = {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache"
+                    },
+                    body: JSON.stringify(jsondata),
+                }
+
+                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores/"${fieldid}"`, settings)
+                    .catch(error => {
+                        // Handle errors here
+                        console.error('Error fetching Patch quizscores data:', error);
+                    });
+            } else {
+                let jsondata = {
+                    "score": userScore,
+                    "username": username,
+                    "quizid": quizid,
+                }
+
+                let settings = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache"
+                    },
+                    body: JSON.stringify(jsondata),
+                }
+
+                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores`, settings)
+                    .catch(error => {
+                        // Handle errors here
+                        console.error('Error fetching Post quizscores data:', error);
+                    });
+            }
+        })
+        .catch(error => {
+            // Handle errors here
+            console.error('Error fetching quizscores data:', error);
+        });
 }
 
-// Inside optionSelected function, after checking the correct answer, call handleQuizScore to post/update the score
-function optionSelected(answer){
-    // existing code
+function updateLeaderboard() {
+    if (sessionStorage.getItem("Username") === null || sessionStorage.getItem("quizID") === null) {
+        console.log("updateLeaderboard cancelled - session has either no quiz id or username")
+        return;
+    } else {
+        var quizid = sessionStorage.getItem("quizID");
+        var username = sessionStorage.getItem("Username");
+    }
+    var leaderboardScore = 0;
 
-    // Call handleQuizScore
-    handleQuizScore('username', userScore);
+    let settings = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "x-apikey": APIKEY,
+            "Cache-Control": "no-cache"
+        },
+    }
 
-    // existing code
+    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"username":"${username}"}`, settings)
+        .then(response => response.json())
+        .then(response => {
+            var size = response.length
+            if (size > 0) {
+                for (let i = 0; i < size; i++) {
+                    leaderboardScore += response[i].score;
+                    console.log(leaderboardScore);
+                }
+
+                let settings = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "x-apikey": APIKEY,
+                        "Cache-Control": "no-cache"
+                    },
+                }
+
+                fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
+                    .then(response => response.json())
+                    .then(response => {
+                        var size = response.length
+                        var fieldid = response[0]._id
+                        if (size > 0) {
+                            let jsondata = {
+                                "score": leaderboardScore
+                            }
+
+                            let settings = {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    "x-apikey": APIKEY,
+                                    "Cache-Control": "no-cache"
+                                },
+                                body: JSON.stringify(jsondata),
+                            }
+
+                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards/"${fieldid}"`, settings)
+                        } else {
+                            let jsondata = {
+                                "score": leaderboardScore,
+                                "username": username
+                            }
+
+                            let settings = {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    "x-apikey": APIKEY,
+                                    "Cache-Control": "no-cache"
+                                },
+                                body: JSON.stringify(jsondata),
+                            }
+
+                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards`, settings)
+                                .catch(error => {
+                                    // Handle errors here
+                                    console.error('Error fetching Post quizscores data:', error);
+                                });
+                        }
+                    })
+            }
+        })
 }
-
-// At the end of quiz or when needed, call calculateTotalScores to get total scores of a user
-calculateTotalScores('username');
