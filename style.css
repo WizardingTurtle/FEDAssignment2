@@ -266,6 +266,7 @@ body {
 #login-bar-box {
     max-width: 50vw;
     margin-left: 25%;
+    
 }
 
 .round-rectangle {
@@ -278,6 +279,17 @@ body {
 #login-text {
     font-size: 25px;
     margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    #login-bar {
+        padding: 0; /* Remove horizontal padding for mobile view */
+    }
+
+    #login-bar-box {
+        max-width: none; /* Remove max-width for mobile view */
+        border-radius: 0; /* Remove border-radius for mobile view */
+    }
 }
 
 #form {
@@ -666,6 +678,9 @@ section .option_list .option .icon {
     padding-left: 0px;
 }
 
+.time_line {
+    max-width: 300px;
+}
 
 .quiznext {
     position: absolute;
@@ -842,4 +857,171 @@ section .option_list .option .icon {
 .returnhome-button:hover {
     background-color: #15314B;
     transform: scale(1.05);
+}
+
+/* For mobile devices */
+@media only screen and (max-width: 600px) {
+    body {
+      font-size: 14px; 
+    }
+  
+    
+    #login-bar-box {
+      max-width: 80vw; 
+      margin-left: 10%; 
+    }
+  
+    
+    .login-btn-container {
+      flex-direction: column; /* Stack buttons vertically */
+    }
+  
+    
+    #registerbtn {
+      display: block; 
+      margin-top: 10px; 
+      margin-left: 10%;
+      text-align: center;
+      max-width: 80vw;
+    }
+
+    #greeting-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #user-icon {
+        margin-bottom: 10px;
+    }
+
+    #content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .quiz-box {
+        width: calc(50% - 30px); 
+        margin-bottom: 20px;
+        background-color: #DBDFE1;
+        background-image: linear-gradient(to bottom, #475F76 120px, rgba(0,0,0,0) 20%);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .quiz-box .quiz-box-div {
+        margin-bottom: 10px; 
+    }
+
+    .quiz-info {
+        text-align: center; 
+    }
+
+
+    /*for quiz*/
+
+    .info_box,
+    .timer_box,
+    .total_que,
+    .progress-container,
+    .quiz_box,
+    .result_box {
+        width: 70%; /* Adjust width to fit smaller screens */
+        margin: 0 auto; /* Center the elements */
+    }
+
+    .info_box {
+        height: 290px;
+    }
+    
+    .info_box .info-list .info {
+        font-size: 14px;
+    }
+
+
+    #placeholder-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 30px;
+    }
+
+    .buttons button {
+        width: 130px;
+    }
+
+    .progress-container {
+        right: 5%;
+        width: 300px;
+    }
+
+    .progress-bar {
+        right: 5%;
+    }
+
+    .quiz_box {
+        top: 57%;
+        width: 300px;
+    }
+
+    .timer_box {
+        position: absolute;
+        top: 12%;
+        width: 150px;
+        height: 130px;
+        z-index: 6; /* Set a higher z-index to make it appear above the quiz box */
+    }
+
+    section {
+        padding: 20px 0px;
+    }
+
+    .que_text {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    section .option_list .option {
+        width: 300px;
+    }
+
+
+    .total_que span {
+        justify-content: center;
+    }
+
+    .quiznext {
+        position: absolute;
+        justify-content: center;
+        top: 100%;
+    }
+
+    .quiznext button {
+        width: 300px;
+    }
+
+    .result-icon {
+        width: 110px;
+        height: 110px;
+        
+    }
+
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    #leaderboard-columns {
+        flex-direction: row;
+    }
+
+    #leaderboard-columns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .leaderboard-column {
+        width: 100%;
+        max-width: 300px; /* Adjust the maximum width as needed */
+        margin-bottom: 20px; /* Adjust margin as needed */
+    }
 }

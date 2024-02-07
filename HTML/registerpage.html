@@ -1,61 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Register Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Add viewport meta tag -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css" />
-  </head>
+</head>
 
-  <body class="no-scroll">
-    <div id="title-bar">
-      <h1>Quests</h1>
-      <h3>& Quizzes</h3>
-    </div>
-    <script>import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js'</script>
+<body class="no-scroll">
+<div id="title-bar">
+    <h1>Quests</h1>
+    <h3>& Quizzes</h3>
+</div>
 
-    <div id="darktriangle"></div>
+<div id="darktriangle"></div>
 
-    <div id="login-bar">
-      <div  id="login-bar-box" class="round-rectangle">
+<div id="login-bar">
+    <div id="login-bar-box" class="round-rectangle">
 
         <div id="login-text">REGISTER</div>
         <form id="form">
-          <label>Username:</label><br />
-          <input id="username" type="text" name="username" required /><br />
+            <label for="username">Username:</label><br />
+            <input id="username" type="text" name="username" required /><br />
 
-          <label>Password:</label><br />
-          <input id="password" type="password" name="password" required/><br />
+            <label for="password">Password:</label><br />
+            <input id="password" type="password" name="password" required/><br />
 
-          <label for="password">Confirm Password:</label><br />
-          <input id="passwordconfirm" type="password" name="password" required/><br />
+            <label for="passwordconfirm">Confirm Password:</label><br /> <!-- Add label for confirm password -->
+            <input id="passwordconfirm" type="password" name="passwordconfirm" required/><br />
 
-          <div class="login-btn-container">
-            <div><input id="loginbtn" type="submit" value="SIGN UP"></div>
-          </div>
-        </form>
-      </div>
-      <div> Already have an account?
-            <a
-              id="loginbtn"
-              onclick="location.assign('./loginpage.html')"
-              >Login here
-            </a>
+            <div class="login-btn-container">
+                <input id="loginbtn" type="submit" value="SIGN UP">
             </div>
+        </form>
     </div>
+    <div> Already have an account?
+        <a id="loginbtn" href="./loginpage.html">Login Here</a> <!-- Use href attribute for links -->
+    </div>
+</div>
 
-    <div id="triangle"></div>
+<div id="triangle"></div>
 
-    <script src="../javascripts/register.js"></script>
+<script src="../javascripts/register.js"></script>
 
-    <div id="add-update-msg">
-      <div class="alert alert-failure" role="alert">
+<div id="add-update-msg">
+    <div class="alert alert-failure" role="alert">
         REGISTER FAILED: IF YOU SEE THIS SCOLD EMMANUEL FOR POOR JS CODING
-      </div>
-    </div> 
-  </body>
+    </div>
+</div>
+</body>
 </html>
