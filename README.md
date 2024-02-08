@@ -1,6 +1,6 @@
 # FEDAssignment2
 
-Our project is focused on making a quiz wesbite with the purpose of entertaining users and testing their trivia knowledge.
+Our project is focused on making a quiz website with the purpose of entertaining users and testing their trivia knowledge.
 
 ## Design Process
 
