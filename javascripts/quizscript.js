@@ -269,7 +269,8 @@ function quitQuiz() {
 //for restdb, implementing features; change here first then copy paste to the top
 async function initializeQuizData() {
     if (sessionStorage.getItem("quizID") === null) {
-        // return user to homepage after 2-3 seco nds since quiz does not exist
+        // return user to homepage after 2-3 seconds since quiz does not exist
+        window.location.replace("../HTML/homepage.html");
     } else {
         var quizid = sessionStorage.getItem("quizID");
     }

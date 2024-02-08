@@ -49,7 +49,7 @@ async function getQuizObjects() {
     .then(response => {
       console.log(response);
       initQuizArray(response);
-      document.getElementById("lottie-loading").innerHTML = "";
+      document.getElementById("lottie-loading-home").innerHTML = "";
       displayQuizObjects(jsonQuizArray);
     })
     .catch(error => { console.error('Error get request failed:', error); });
@@ -224,4 +224,8 @@ function calculateRank(points) {
 function logout() {
   sessionStorage.clear()
   window.location.replace("../HTML/loginpage.html")
+}
+
+function jumpToLeaderboardPage() {
+  window.location.assign("../HTML/leaderboardpage.html")
 }

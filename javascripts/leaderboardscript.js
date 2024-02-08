@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("third-place-score").innerText = data[2].score;
             document.getElementById("third-place-username").innerText = data[2].username;
 
+            document.getElementById("lottie-loading-home").style.display = "none";
             // Display the top 20 names based on the selected tab
             for (let i = 3; i < Math.min(data.length, 20); i++) {
                 const item = data[i];

@@ -29,7 +29,6 @@
         <img src="../images/Default_Profile_Picture.png" alt="User Icon" id="user-icon">
         <h3 id="usernameHome">GuestUser</h3>
         <a
-        id = "l"
         type="text"
         onclick="logout()"
         >Logout</a>
@@ -51,6 +50,13 @@
                     <span id = "user-points" class="stat-value">User's Points</span>
                 </div>
             </div>
+            <div>
+                <a
+                type="text"
+                onclick="jumpToLeaderboardPage() "
+                >Leaderboards
+            </a>
+            </div>
         </div>
     </div>
 
@@ -66,7 +72,7 @@
     <div id="content">
         <!-- Quiz boxes content goes here -->
 
-        <div id="lottie-loading">
+        <div id="lottie-loading-home">
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
             <lottie-player 
                 src="https://lottie.host/39027a3c-0413-4086-9fa5-687aed7344b8/U4LWfxonGw.json"  
