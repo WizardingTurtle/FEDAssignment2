@@ -1,7 +1,7 @@
 // code for homepage.html
 // idea grab user info from session storage and display it
 // api request to grab data for quizes to create objects
-const APIKEY = "6593f49e3ea4be628deb6cfa";
+const APIKEY = "65c099ce00d3da1e0863a2dd";
 document.addEventListener("DOMContentLoaded", SetupHome);
 
 const subsearch = document.getElementById("search-bar-input");
@@ -44,7 +44,7 @@ async function getQuizObjects() {
 
   // fetch data and check if password valid
   // fetch from quiz and create quiz object based on api info
-  await fetch(`https://mydatabase-c3eb.restdb.io/rest/quiz`, settings)
+  await fetch(`https://firestoredb-a218.restdb.io/rest/quiz`, settings)
     .then(response => response.json())
     .then(response => {
       console.log(response);
@@ -193,7 +193,7 @@ function getUserRanking() {
   } else {
     var username = sessionStorage.getItem("Username");
 
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
+    fetch(`https://firestoredb-a218.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
       .then(response => response.json())
       .then(response => {
         console.log("Leaderboard data for user " + response);

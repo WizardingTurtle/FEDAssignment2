@@ -1,5 +1,5 @@
 //API Key
-const APIKEY = "6593f49e3ea4be628deb6cfa";
+const APIKEY = "65c099ce00d3da1e0863a2dd";
 // QuizArray
 var questions = [];
 
@@ -286,7 +286,7 @@ async function initializeQuizData() {
         },
     }
 
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizquestions?q={"quizid":"${quizid}"}`, settings)
+    fetch(`https://firestoredb-a218.restdb.io/rest/quizquestions?q={"quizid":"${quizid}"}`, settings)
         .then(response => response.json())
         .then(response => {
             console.log(response)
@@ -327,7 +327,7 @@ function updateQuizScore() {
         },
     }
 
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"quizid":"${quizid}","username":"${username}"}`, settings)
+    fetch(`https://firestoredb-a218.restdb.io/rest/quizscores?q={"quizid":"${quizid}","username":"${username}"}`, settings)
         .then(response => response.json())
         .then(response => {
             console.log(response)
@@ -351,14 +351,16 @@ function updateQuizScore() {
                     },
                     body: JSON.stringify(jsondata),
                 }
+                console.log("patch fetch sent")
 
-                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores/${fieldid}`, settings)
-                    .then(updateLeaderboard())
+                fetch(`https://firestoredb-a218.restdb.io/rest/quizscores/${fieldid}`, settings)
+                    .then(setTimeout(updateLeaderboard(), 4000))
                     .catch(error => {
                         // Handle errors here
                         console.error('Error fetching Patch quizscores data:', error);
                     });
             } else {
+                console.log("send a post request")
                 let jsondata = {
                     "score": userScore,
                     "username": username,
@@ -375,8 +377,9 @@ function updateQuizScore() {
                     body: JSON.stringify(jsondata),
                 }
 
-                fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores`, settings)
-                    .then(updateLeaderboard())
+                console.log("{POST} fetch sent")
+                fetch(`https://firestoredb-a218.restdb.io/rest/quizscores`, settings)
+                    .then(setTimeout(updateLeaderboard(), 4000))
                     .catch(error => {
                         // Handle errors here
                         console.error('Error fetching Post quizscores data:', error);
@@ -390,8 +393,10 @@ function updateQuizScore() {
 }
 
 function updateLeaderboard() {
+    console.log("updateleaderboard ran")
     if (sessionStorage.getItem("Username") === null || sessionStorage.getItem("quizID") === null) {
         console.log("updateLeaderboard cancelled - session has either no quiz id or username")
+        console.log("updateleaderboard ended abruptly")
         return;
     } else {
         var username = sessionStorage.getItem("Username");
@@ -408,7 +413,7 @@ function updateLeaderboard() {
         },
     }
 
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/quizscores?q={"username":"${username}"}`, settings)
+    fetch(`https://firestoredb-a218.restdb.io/rest/quizscores?q={"username":"${username}"}`, settings)
         .then(response => response.json())
         .then(response => {
             var size = response.length
@@ -427,11 +432,14 @@ function updateLeaderboard() {
                     },
                 }
 
-                fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
+                fetch(`https://firestoredb-a218.restdb.io/rest/leaderboards?q={"username":"${username}"}`, settings)
                     .then(response => response.json())
                     .then(response => {
+                        console.log(response)
+                        console.log("get request recived")
                         var size = response.length
                         if (size > 0) {
+                            console.log("patch request sending")
                             var fieldid = response[0]._id
                             let jsondata = {
                                 "score": leaderboardScore
@@ -447,16 +455,21 @@ function updateLeaderboard() {
                                 body: JSON.stringify(jsondata),
                             }
 
-                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards/${fieldid}`, settings)
+                            fetch(`https://firestoredb-a218.restdb.io/rest/leaderboards/${fieldid}`, settings)
                                 .then(document.getElementById("lottie-loading").style.display = "none")
+                                .catch(error => {
+                                    // Handle errors here
+                                    console.error('Error fetching Post quizscores data:', error);
+                                });
                         } else {
                             let jsondata = {
                                 "score": leaderboardScore,
                                 "username": username
                             }
-
+                            console.log(leaderboardScore + " " + username)
+                            console.log(typeof(leaderboardScore))
                             let settings = {
-                                method: 'PATCH',
+                                method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                     "x-apikey": APIKEY,
@@ -465,7 +478,7 @@ function updateLeaderboard() {
                                 body: JSON.stringify(jsondata),
                             }
 
-                            fetch(`https://mydatabase-c3eb.restdb.io/rest/leaderboards`, settings)
+                            fetch(`https://firestoredb-a218.restdb.io/rest/leaderboards`, settings)
                                 .then(document.getElementById("lottie-loading").style.display = "none")
                                 .catch(error => {
                                     // Handle errors here
@@ -473,6 +486,10 @@ function updateLeaderboard() {
                                 });
                         }
                     })
+                    .catch(error => {
+                        // Handle errors here
+                        console.error('Error fetching GET quizscores data:', error);
+                    });
             }
         })
 }

@@ -2,7 +2,7 @@
 // idea - request data from restdb and check if account does not exist
 // if true - create and post account to DB before showing homepage using selected profile
 document.addEventListener("DOMContentLoaded", setupRegister);
-const APIKEY = "6593f49e3ea4be628deb6cfa";
+const APIKEY = "65c099ce00d3da1e0863a2dd";
 // functions
 // stop submit from refreshing 
 const subform = document.getElementById("loginbtn");
@@ -126,7 +126,7 @@ async function registerAccount(Username, Password) {
     }
 
     console.log("ra-get response occurs")
-    fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts?q={"username":"${Username}"}`, settings)
+    fetch(`https://firestoredb-a218.restdb.io/rest/account?q={"username":"${Username}"}`, settings)
         .then(response => response.json())
         .then(response => {// check if account does not exist else cancel post request
             console.log(response);
@@ -151,7 +151,7 @@ async function registerAccount(Username, Password) {
 
                 // do a post request to create account
                 console.log("ra-post response occurs")
-                fetch(`https://mydatabase-c3eb.restdb.io/rest/accounts`, settings)
+                fetch(`https://firestoredb-a218.restdb.io/rest/account`, settings)
                     .then(response => response.json())
                     .then(response => {
                         console.log("post has been sent");

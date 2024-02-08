@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // initilize settings for GET request
     // API key
-    const APIKEY = "6593f49e3ea4be628deb6cfa";
+    const APIKEY = "65c099ce00d3da1e0863a2dd";
 
     let settings = {
         method: 'GET',
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // url returns first 20 highest scores
-    const apiUrl = `https://mydatabase-c3eb.restdb.io/rest/leaderboards?sort=score&dir=-1&max=20`; 
+    const apiUrl = `https://firestoredb-a218.restdb.io/rest/leaderboards?sort=score&dir=-1&max=20`; 
 
     // Initial data for the "All" tab
     updateLeaderboard(apiUrl);

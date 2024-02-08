@@ -353,11 +353,15 @@ input[type="password"] {
     /* Smooth transition on hover */
 }
 
-#add-update-msg {
-    display: none;
-    color: rgb(162, 25, 25);
-    margin-top: 10px;
-    text-align: center;
+
+#add-update-msg { 
+    display: none; 
+    color: white; 
+    position: fixed; 
+    bottom: 1vh; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
 }
 
 .no-scroll {
@@ -905,6 +909,25 @@ section .option_list .option .icon {
     transform: scale(1.05);
 }
 
+.quiz-box-div-quiz {
+    position: relative;
+    height: 120px;
+    width: 120px;
+
+    flex-shrink: 0;
+
+    max-height: 120px;
+    max-width: 120px;
+
+    overflow: hidden;
+    border-radius: 100%;
+    flex-grow: 1;
+    margin-right: 20px;
+
+    box-shadow: 2px 3px 10px black;
+}
+
+
 /* For mobile devices */
 @media only screen and (max-width: 600px) {
     body {
@@ -1012,6 +1035,24 @@ section .option_list .option .icon {
         width: 300px;
     }
 
+    .quiz-box-div-quiz {
+        position: relative;
+        height: 120px;
+        width: 120px;
+    
+        flex-shrink: 0;
+    
+        max-height: 120px;
+        max-width: 120px;
+    
+        overflow: hidden;
+        border-radius: 100%;
+        flex-grow: 1;
+        margin-right: 20px;
+    
+        box-shadow: 2px 3px 10px black;
+    }
+
     .timer_box {
         position: absolute;
         top: 12%;
@@ -1026,7 +1067,7 @@ section .option_list .option .icon {
     }
 
     .que_text {
-        font-size: 20px;
+        font-size: 14px;
         font-weight: 600;
     }
 
